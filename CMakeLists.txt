@@ -3,7 +3,7 @@ project(SDLPodstawa)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES main.cpp Gra/Game.cpp Gra/Game.h Gra/InputManager.cpp Gra/InputManager.h Gra/TextureManager.cpp Gra/TextureManager.h Gra/Aktorzy/ITickable.h Gra/Aktorzy/IRenderable.h Gra/Aktorzy/IRenderable.cpp Gra/Aktorzy/ITickable.cpp Gra/Aktorzy/Actor.cpp Gra/Aktorzy/Actor.h)
 add_executable(SDLPodstawa ${SOURCE_FILES})
 
 INCLUDE(FindPkgConfig)
