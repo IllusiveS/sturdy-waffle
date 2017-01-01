@@ -7,6 +7,6 @@
 --
 
 textures = {
-    Grass = "Textures/Grass.png",
-    Wall = "Textures/Wall.png"
+    grass = "Textures/Grass.png",
+    wall = "Textures/Wall.png"
 }

@@ -1,7 +1,8 @@
 #include <iostream>
+#include <Gra/Game.h>
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    Game game = Game();
 	//Zrobić obiekcik gry
 	//Odpalamy pętlę
 		//Sprawdzamy input

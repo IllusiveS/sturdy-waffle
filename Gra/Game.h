@@ -7,6 +7,8 @@
 
 //Klasa do zarządzania całą grą
 
+#include "TextureManager.h"
+
 class Game {
 public:
 	Game();
@@ -19,7 +21,9 @@ public:
 private:
 	//TODO wskaźniki do aktorów gry
 	//TODO wskaźniki do funkcji (renderingu i updejtu)
-	//TODO Texture manager
+	SDL_Window * mainWindow;
+	TextureManager * textureManager;
+	SDL_Renderer * mainRenderer;
 	//TODO GameManager
 	//TODO statyczny dostęp mnie się wydaje do klasy
 };

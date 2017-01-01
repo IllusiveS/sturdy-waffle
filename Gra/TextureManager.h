@@ -11,6 +11,7 @@
 
 //#include <LuaBridge.h>
 #include <iostream>
+
 extern "C" {
 	#include "lua.h"
 	#include "lauxlib.h"
@@ -20,13 +21,16 @@ extern "C" {
 //Klasa do przechowywania tekstur
 class TextureManager {
 public:
-	TextureManager();
+	TextureManager(SDL_Renderer * renderer);
 	~TextureManager();
 
 	SDL_Texture * GetTexture(std::string nazwaTextury) const;
 private:
 	std::map<std::string, SDL_Texture *> textures;
+	SDL_Renderer * mainRenderer;
+	SDL_Window * window;
 
+	void ReadTextures();
 };
 
 
