@@ -21,16 +21,18 @@ extern "C" {
 //Klasa do przechowywania tekstur
 class TextureManager {
 public:
-	TextureManager(SDL_Renderer * renderer);
+	TextureManager(SDL_Renderer * renderer, SDL_Surface * mainSurface);
 	~TextureManager();
 
 	SDL_Texture * GetTexture(std::string nazwaTextury) const;
 private:
 	std::map<std::string, SDL_Texture *> textures;
 	SDL_Renderer * mainRenderer;
+	SDL_Surface * mainSurface;
 	SDL_Window * window;
 
 	void ReadTextures();
+	SDL_Surface * loadSurface( std::string path);
 };
 
 

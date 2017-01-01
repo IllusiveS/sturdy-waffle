@@ -13,7 +13,7 @@ SDL_Texture * TextureManager::GetTexture(std::string nazwaTextury) const {
 	return nullptr;
 }
 
-TextureManager::TextureManager(SDL_Renderer * renderer) {
+TextureManager::TextureManager(SDL_Renderer * renderer, SDL_Surface * mainSurface) : mainRenderer(renderer), mainSurface(mainSurface) {
 	ReadTextures();
 }
 
@@ -26,14 +26,11 @@ void TextureManager::ReadTextures() {
 	std::cout << "ReadingTextures" << std::endl;
 	LuaRef texturesArray = getGlobal(L, "textures");
 	Iterator itr = Iterator(texturesArray);
-	std::__cxx11::string prevKey = "";
-	do {
-		std::__cxx11::string texName = itr.key();
-		if(texName == prevKey) {
-			break;
-		}
-		std::__cxx11::string texPath = itr.value();
-		SDL_Surface * loadedSurface = IMG_Load(texPath.c_str());
+	int length = texturesArray.length();
+	for( ; !itr.isNil(); ) {
+		std::string texName = itr.key();
+		std::string texPath = itr.value();
+		SDL_Surface * loadedSurface = loadSurface(texPath);
 		if(loadedSurface == NULL){
 			printf("[err]failed to load texture %s from %s ERROR: %s \n", texName.c_str(), texPath.c_str(), SDL_GetError());
 		} else {
@@ -46,9 +43,35 @@ void TextureManager::ReadTextures() {
 				textures[texName] = newTex;
 			}
 		}
-		prevKey = texName;
 		++itr;
-	} while(true);
+	}
+}
+
+SDL_Surface* TextureManager::loadSurface( std::string path )
+{
+	//The final optimized image
+	SDL_Surface* optimizedSurface = NULL;
+
+	//Load image at specified path
+	SDL_Surface* loadedSurface = IMG_Load( path.c_str() );
+	if( loadedSurface == NULL )
+	{
+		printf( "[err]Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError() );
+	}
+	else
+	{
+		//Convert surface to screen format
+		optimizedSurface = SDL_ConvertSurface( loadedSurface, mainSurface->format, NULL );
+		if( optimizedSurface == NULL )
+		{
+			printf( "[err]Unable to optimize image %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
+		}
+
+		//Get rid of old loaded surface
+		SDL_FreeSurface( loadedSurface );
+	}
+
+	return optimizedSurface;
 }
 
 TextureManager::~TextureManager() {

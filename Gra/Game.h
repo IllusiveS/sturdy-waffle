@@ -19,11 +19,13 @@ public:
 	void UpdatePhysics();
 	void Render();
 private:
+	bool init();
 	//TODO wskaźniki do aktorów gry
 	//TODO wskaźniki do funkcji (renderingu i updejtu)
 	SDL_Window * mainWindow;
-	TextureManager * textureManager;
+	SDL_Surface * mainSurface;
 	SDL_Renderer * mainRenderer;
+	TextureManager * textureManager;
 	//TODO GameManager
 	//TODO statyczny dostęp mnie się wydaje do klasy
 };
