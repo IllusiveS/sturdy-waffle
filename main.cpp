@@ -10,7 +10,13 @@ int main(int argc, char * args[]) {
 		return 1;
 	}
     Game::Setup();
-	//Zrobić obiekcik gry
+	Game * gra = Game::GetGame();
+	for( ; !gra->isFinished; ) {
+		gra->UpdateInput();
+		gra->UpdateTick();
+		gra->UpdatePhysics();
+		gra->Render();
+	}
 	//Odpalamy pętlę
 		//Sprawdzamy input
 		//Robimy update na każdym obiekcie

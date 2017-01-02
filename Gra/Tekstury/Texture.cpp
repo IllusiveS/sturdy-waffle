@@ -43,19 +43,26 @@ SDL_Surface * Texture::loadFromFile(std::string path) {
 }
 
 void Texture::free() {
-
+	if( mTexture != NULL )
+	{
+		SDL_DestroyTexture( mTexture );
+		mTexture = NULL;
+		mWidth = 0;
+		mHeight = 0;
+	}
 }
 
 void Texture::render(int x, int y) {
-
+	SDL_Rect renderQuad = { x, y, mWidth, mHeight };
+	SDL_RenderCopy( Game::GetGame()->GetRenderer(), mTexture, NULL, &renderQuad );
 }
 
 int Texture::getWidth() {
-	return 0;
+	return mWidth;
 }
 
 int Texture::getHeight() {
-	return 0;
+	return mHeight;
 }
 
 SDL_Texture *Texture::generateTexture(SDL_Surface * loadedSurface) {
@@ -81,6 +88,8 @@ bool Texture::createTextureFromFile(std::string path) {
 		printf("[err]Cant read %s \n", path.c_str());
 	} else {
 		returnValue = true;
+		mWidth = surface->w;
+		mHeight = surface->h;
 		printf("[suc]Created texture for %s \n", path.c_str());
 	}
 	mTexture = tex;

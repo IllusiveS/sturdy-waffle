@@ -14,7 +14,7 @@ public:
 	static void Setup();
 	void Prepare();
 	static void Close();
-
+	bool isFinished;
 	void UpdateInput();
 	void UpdateTick();
 	void UpdatePhysics();
@@ -46,7 +46,6 @@ private:
 	SDL_Renderer * mainRenderer;
 	TextureManager * textureManager;
 	//TODO GameManager
-	//TODO statyczny dostęp mnie się wydaje do klasy
 };
 
 
