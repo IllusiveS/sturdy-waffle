@@ -52,9 +52,9 @@ void Texture::free() {
 	}
 }
 
-void Texture::render(int x, int y) {
+void Texture::render(int x, int y, SDL_Renderer * renderer) {
 	SDL_Rect renderQuad = { x, y, mWidth, mHeight };
-	SDL_RenderCopy( Game::GetGame()->GetRenderer(), mTexture, NULL, &renderQuad );
+	SDL_RenderCopy( renderer, mTexture, NULL, &renderQuad );
 }
 
 int Texture::getWidth() {
@@ -85,7 +85,7 @@ bool Texture::createTextureFromFile(std::string path) {
 	SDL_Texture * tex = generateTexture(surface);
 	if(tex == NULL) {
 		returnValue = false;
-		printf("[err]Cant read %s \n", path.c_str());
+		printf("[err]Cant generate texture %s \n", path.c_str());
 	} else {
 		returnValue = true;
 		mWidth = surface->w;

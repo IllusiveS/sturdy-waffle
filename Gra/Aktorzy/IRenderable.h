@@ -9,6 +9,7 @@
 #include <SDL_render.h>
 
 class IRenderable {
+public:
 	IRenderable();
 
 	virtual void Render(SDL_Renderer * renderer) = 0;

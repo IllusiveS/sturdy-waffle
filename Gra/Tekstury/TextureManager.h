@@ -25,7 +25,7 @@ public:
 	TextureManager();
 	~TextureManager();
 
-	SDL_Texture * GetTexture(std::string nazwaTextury) const;
+	Texture * GetTexture(std::string nazwaTextury) const;
 private:
 	std::map<std::string, Texture *> textures;
 

@@ -7,7 +7,8 @@
 
 //Klasa do podstawowego obiektu w naszej grze, który będzie odgrywać jakąś rolę (hehe)
 class Actor {
-
+public:
+	Actor();
 };
 
 

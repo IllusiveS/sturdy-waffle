@@ -9,8 +9,9 @@
 
 using namespace luabridge;
 
-SDL_Texture * TextureManager::GetTexture(std::string nazwaTextury) const {
-	return nullptr;
+Texture * TextureManager::GetTexture(std::string nazwaTextury) const {
+	Texture * texToReturn = textures.at(nazwaTextury);
+	return texToReturn;
 }
 
 TextureManager::TextureManager() {

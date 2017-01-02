@@ -12,7 +12,7 @@ void Game::UpdateInput() {
 
 }
 
-Game::Game() {
+Game::Game() : isFinished(false) {
 
 }
 void Game::Prepare() {
@@ -93,7 +93,13 @@ void Game::UpdatePhysics() {
 }
 
 void Game::Render() {
-
+	SDL_SetRenderDrawColor( mainRenderer, 0, 0xFF, 0xFF, 0xFF );
+	SDL_RenderClear(mainRenderer);
+	for(auto itr = renders.begin(); itr != renders.end(); itr++) {
+		IRenderable * renderable = *itr;
+		renderable->Render(mainRenderer);
+	}
+	SDL_RenderPresent(mainRenderer);
 }
 
 void Game::Setup() {
@@ -123,4 +129,16 @@ SDL_Renderer * Game::GetRenderer() const {
 
 SDL_Surface * Game::GetSurface() const {
 	return mainSurface;
+}
+
+void Game::SubscribeActor(Actor *actor) {
+	actors.insert(actor);
+}
+
+void Game::SubscribeTick(ITickable *tick) {
+	ticks.insert(tick);
+}
+
+void Game::SubscribeRender(IRenderable *render) {
+	renders.insert(render);
 }

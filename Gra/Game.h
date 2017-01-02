@@ -7,6 +7,10 @@
 
 //Klasa do zarządzania całą grą
 
+#include <Gra/Aktorzy/IRenderable.h>
+#include <set>
+#include <Gra/Aktorzy/Actor.h>
+#include <Gra/Aktorzy/ITickable.h>
 #include "Gra/Tekstury/TextureManager.h"
 
 class Game {
@@ -37,10 +41,18 @@ public:
 	SDL_Surface * GetSurface() const;
 	//koniec dostępu do pól
 
+public://Zapisywanie się aktorów
+	void SubscribeActor(Actor * actor);
+	void SubscribeTick(ITickable * tick);
+	void SubscribeRender(IRenderable * render);
+
 private:
 	bool init();
-	//TODO wskaźniki do aktorów gry
-	//TODO wskaźniki do funkcji (renderingu i updejtu)
+
+	std::set<ITickable *> ticks;
+	std::set<IRenderable *> renders;
+	std::set<Actor *> actors;
+
 	SDL_Window * mainWindow;
 	SDL_Surface * mainSurface;
 	SDL_Renderer * mainRenderer;

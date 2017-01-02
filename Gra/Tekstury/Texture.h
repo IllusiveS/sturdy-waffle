@@ -22,7 +22,7 @@ public:
 	bool createTextureFromFile(std::string path);
 
 	//Renders texture at given point
-	void render( int x, int y );
+	void render( int x, int y, SDL_Renderer * renderer);
 
 	//Gets image dimensions
 	int getWidth();
