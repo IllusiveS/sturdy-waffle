@@ -26,7 +26,6 @@ void TextureManager::ReadTextures() {
 	std::cout << "ReadingTextures" << std::endl;
 	LuaRef texturesArray = getGlobal(L, "textures");
 	Iterator itr = Iterator(texturesArray);
-	int length = texturesArray.length();
 	for( ; !itr.isNil(); ) {
 		std::string texName = itr.key();
 		std::string texPath = itr.value();
@@ -61,7 +60,7 @@ SDL_Surface* TextureManager::loadSurface( std::string path )
 	else
 	{
 		//Convert surface to screen format
-		optimizedSurface = SDL_ConvertSurface( loadedSurface, mainSurface->format, NULL );
+		optimizedSurface = SDL_ConvertSurface( loadedSurface, mainSurface->format, 0);
 		if( optimizedSurface == NULL )
 		{
 			printf( "[err]Unable to optimize image %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
