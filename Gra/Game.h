@@ -12,6 +12,7 @@
 class Game {
 public:
 	static void Setup();
+	void Prepare();
 	static void Close();
 
 	void UpdateInput();
@@ -27,13 +28,16 @@ private:
 	Game();
 	~Game();
 	//koniec singletona
+
 	//DOSTĘP DO PÓL
+public:
 	TextureManager * GetTextureManager() const;
 	SDL_Window * GetWindow() const;
 	SDL_Renderer * GetRenderer() const;
 	SDL_Surface * GetSurface() const;
 	//koniec dostępu do pól
 
+private:
 	bool init();
 	//TODO wskaźniki do aktorów gry
 	//TODO wskaźniki do funkcji (renderingu i updejtu)

@@ -13,12 +13,12 @@ SDL_Texture * TextureManager::GetTexture(std::string nazwaTextury) const {
 	return nullptr;
 }
 
-TextureManager::TextureManager(SDL_Renderer * renderer, SDL_Surface * mainSurface) : mainRenderer(renderer), mainSurface(mainSurface) {
+TextureManager::TextureManager() {
 	ReadTextures();
 }
 
 void TextureManager::ReadTextures() {
-	textures = std::map<std::string, SDL_Texture *>();
+	textures = std::map<std::string, Texture *>();
 	lua_State *L = luaL_newstate();
 	luaL_dofile(L, "Lua/Textures.lua");
 	luaL_openlibs(L);
@@ -29,52 +29,18 @@ void TextureManager::ReadTextures() {
 	for( ; !itr.isNil(); ) {
 		std::string texName = itr.key();
 		std::string texPath = itr.value();
-		SDL_Surface * loadedSurface = loadSurface(texPath);
-		if(loadedSurface == NULL){
-			printf("[err]failed to load texture %s from %s ERROR: %s \n", texName.c_str(), texPath.c_str(), SDL_GetError());
+		Texture * newTexture = new Texture();
+		if(newTexture->createTextureFromFile(texPath)) {
+			textures[texName] = newTexture;
 		} else {
-			SDL_Texture * newTex = SDL_CreateTextureFromSurface(mainRenderer, loadedSurface);
-			if(newTex == NULL) {
-				printf("[err]failed to create texture %s ERROR: %s \n", texName.c_str(), SDL_GetError());
-			} else {
-				printf("[suc]created texture %s from %s \n", texName.c_str(), texPath.c_str());
-				SDL_FreeSurface(loadedSurface);
-				textures[texName] = newTex;
-			}
+			delete newTexture;
 		}
 		++itr;
 	}
 }
 
-SDL_Surface* TextureManager::loadSurface( std::string path )
-{
-	//The final optimized image
-	SDL_Surface* optimizedSurface = NULL;
-
-	//Load image at specified path
-	SDL_Surface* loadedSurface = IMG_Load( path.c_str() );
-	if( loadedSurface == NULL )
-	{
-		printf( "[err]Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError() );
-	}
-	else
-	{
-		//Convert surface to screen format
-		optimizedSurface = SDL_ConvertSurface( loadedSurface, mainSurface->format, 0);
-		if( optimizedSurface == NULL )
-		{
-			printf( "[err]Unable to optimize image %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
-		}
-
-		//Get rid of old loaded surface
-		SDL_FreeSurface( loadedSurface );
-	}
-
-	return optimizedSurface;
-}
-
 TextureManager::~TextureManager() {
 	for(auto itr = textures.begin(); itr != textures.end(); itr++) {
-		SDL_DestroyTexture(itr->second);
+		itr->second->free();
 	}
 }

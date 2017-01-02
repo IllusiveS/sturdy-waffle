@@ -12,7 +12,10 @@ void Game::UpdateInput() {
 
 }
 
-Game::Game() : mainRenderer() {
+Game::Game() {
+
+}
+void Game::Prepare() {
 	if(!init()) {
 		printf("[err]cant initialize SDL \n");
 	} else {
@@ -22,7 +25,8 @@ Game::Game() : mainRenderer() {
 	if(surface == NULL) {
 		printf("[err]ERROR: %s \n", SDL_GetError());
 	}
-	textureManager = new TextureManager(mainRenderer, surface);
+	mainSurface = surface;
+	textureManager = new TextureManager();
 	//TODO stworzenie managerów inputu i tekstur
 }
 
@@ -94,6 +98,7 @@ void Game::Render() {
 
 void Game::Setup() {
 	gameSingleton = new Game();
+	gameSingleton->Prepare();
 }
 
 void Game::Close() {
@@ -104,18 +109,18 @@ Game *Game::GetGame() {
 	return gameSingleton;
 }
 
-TextureManager *Game::GetTextureManager() const {
+TextureManager * Game::GetTextureManager() const {
 	return textureManager;
 }
 
-SDL_Window *Game::GetWindow() const {
+SDL_Window * Game::GetWindow() const {
 	return mainWindow;
 }
 
-SDL_Renderer *Game::GetRenderer() const {
+SDL_Renderer * Game::GetRenderer() const {
 	return mainRenderer;
 }
 
-SDL_Surface *Game::GetSurface() const {
+SDL_Surface * Game::GetSurface() const {
 	return mainSurface;
 }

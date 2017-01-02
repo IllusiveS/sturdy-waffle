@@ -120,6 +120,12 @@
 		<Unit filename="/home/wysockipatryk/ClionProjects/SDLPodstawa/Gra/InputManager.h">
 			<Option target="SDLPodstawa.exe"/>
 		</Unit>
+		<Unit filename="/home/wysockipatryk/ClionProjects/SDLPodstawa/Gra/Tekstury/Texture.cpp">
+			<Option target="SDLPodstawa.exe"/>
+		</Unit>
+		<Unit filename="/home/wysockipatryk/ClionProjects/SDLPodstawa/Gra/Tekstury/Texture.h">
+			<Option target="SDLPodstawa.exe"/>
+		</Unit>
 		<Unit filename="/home/wysockipatryk/ClionProjects/SDLPodstawa/Gra/Tekstury/TextureManager.cpp">
 			<Option target="SDLPodstawa.exe"/>
 		</Unit>
