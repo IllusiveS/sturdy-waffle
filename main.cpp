@@ -9,7 +9,7 @@ int main(int argc, char * args[]) {
 	if(SDL_Init(SDL_INIT_EVERYTHING) == -1) {
 		return 1;
 	}
-    Game game = Game();
+    Game::Setup();
 	//Zrobić obiekcik gry
 	//Odpalamy pętlę
 		//Sprawdzamy input
@@ -17,5 +17,6 @@ int main(int argc, char * args[]) {
 		//Renderujemy syf
 	std::chrono::seconds sec(5);
 	std::this_thread::sleep_for(sec);
+	Game::Close();
     return 0;
 }

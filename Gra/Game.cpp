@@ -6,6 +6,8 @@
 #include <SDL_image.h>
 #include "Game.h"
 
+Game * Game::gameSingleton = nullptr;
+
 void Game::UpdateInput() {
 
 }
@@ -88,4 +90,32 @@ void Game::UpdatePhysics() {
 
 void Game::Render() {
 
+}
+
+void Game::Setup() {
+	gameSingleton = new Game();
+}
+
+void Game::Close() {
+	delete gameSingleton;
+}
+
+Game *Game::GetGame() {
+	return gameSingleton;
+}
+
+TextureManager *Game::GetTextureManager() const {
+	return textureManager;
+}
+
+SDL_Window *Game::GetWindow() const {
+	return mainWindow;
+}
+
+SDL_Renderer *Game::GetRenderer() const {
+	return mainRenderer;
+}
+
+SDL_Surface *Game::GetSurface() const {
+	return mainSurface;
 }
