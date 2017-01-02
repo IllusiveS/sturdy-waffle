@@ -7,7 +7,7 @@
 
 //Klasa do zarządzania całą grą
 
-#include "TextureManager.h"
+#include "Gra/Tekstury/TextureManager.h"
 
 class Game {
 public:
