@@ -1,46 +1,26 @@
-//
-// Created by wysockipatryk on 1/2/17.
-//
-
 #include <SDL_image.h>
 #include <Gra/Game.h>
 #include "Texture.h"
 
-Texture::Texture() : mTexture(NULL), mWidth(0), mHeight(0) {
-
+Texture::Texture()
+{
+	//Initialize
+	mTexture = NULL;
+	mWidth = 0;
+	mHeight = 0;
 }
 
-Texture::~Texture() {
+Texture::~Texture()
+{
+	//Deallocate
 	free();
 }
 
-void Texture::free() {
-	if( mTexture != NULL )
-	{
-		SDL_DestroyTexture( mTexture );
-		mTexture = NULL;
-		mWidth = 0;
-		mHeight = 0;
-	}
-}
+bool Texture::loadFromFile( std::string path )
+{
+	//Get rid of preexisting texture
+	free();
 
-void Texture::render(int x, int y, SDL_Renderer * renderer) {
-	SDL_Rect renderQuad = { x, y, mWidth, mHeight };
-	int result = SDL_RenderCopy( renderer, mTexture, NULL, &renderQuad );
-	if(result != 0){
-		printf("[err]Cant render ERROR: %s\n", SDL_GetError());
-	}
-}
-
-int Texture::getWidth() {
-	return mWidth;
-}
-
-int Texture::getHeight() {
-	return mHeight;
-}
-
-SDL_Texture *Texture::generateTexture(std::string path) {
 	//The final texture
 	SDL_Texture* newTexture = NULL;
 
@@ -52,30 +32,56 @@ SDL_Texture *Texture::generateTexture(std::string path) {
 	}
 	else
 	{
+		//Color key image
+		SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0, 0xFF, 0xFF ) );
+
 		//Create texture from surface pixels
 		newTexture = SDL_CreateTextureFromSurface( Game::GetGame()->GetRenderer(), loadedSurface );
 		if( newTexture == NULL )
 		{
 			printf( "Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
 		}
+		else
+		{
+			//Get image dimensions
+			mWidth = loadedSurface->w;
+			mHeight = loadedSurface->h;
+		}
 
 		//Get rid of old loaded surface
 		SDL_FreeSurface( loadedSurface );
 	}
 
-	return newTexture;
+	//Return success
+	mTexture = newTexture;
+	return mTexture != NULL;
 }
 
-bool Texture::createTextureFromFile(std::string path) {
-	bool returnValue = false;
-	SDL_Texture * tex = generateTexture(path);
-	if(tex == NULL) {
-		returnValue = false;
-	} else {
-		returnValue = true;
-//		mWidth = surface->w;
-//		mHeight = surface->h;
+void Texture::free()
+{
+	//Free texture if it exists
+	if( mTexture != NULL )
+	{
+		SDL_DestroyTexture( mTexture );
+		mTexture = NULL;
+		mWidth = 0;
+		mHeight = 0;
 	}
-	mTexture = tex;
-	return returnValue;
+}
+
+void Texture::render( int x, int y )
+{
+	//Set rendering space and render to screen
+	SDL_Rect renderQuad = { x, y, mWidth, mHeight };
+	SDL_RenderCopy( Game::GetGame()->GetRenderer(), mTexture, NULL, &renderQuad );
+}
+
+int Texture::getWidth()
+{
+	return mWidth;
+}
+
+int Texture::getHeight()
+{
+	return mHeight;
 }

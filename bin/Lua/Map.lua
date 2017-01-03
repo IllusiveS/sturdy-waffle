@@ -18,5 +18,5 @@ maptiles = {
 }
 
 map = {
-    "grass", "wall", "grass", "wall"
+    "grass", "wall", "grass", "wall", "wall", "wall"
 }

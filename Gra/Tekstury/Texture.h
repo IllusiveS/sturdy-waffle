@@ -8,7 +8,9 @@
 #include <string>
 #include <SDL_render.h>
 
-class Texture {
+//Texture wrapper class
+class Texture
+{
 public:
 	//Initializes variables
 	Texture();
@@ -16,24 +18,22 @@ public:
 	//Deallocates memory
 	~Texture();
 
+	//Loads image at specified path
+	bool loadFromFile( std::string path );
+
 	//Deallocates texture
 	void free();
 
-	bool createTextureFromFile(std::string path);
-
 	//Renders texture at given point
-	void render( int x, int y, SDL_Renderer * renderer);
+	void render( int x, int y );
 
 	//Gets image dimensions
 	int getWidth();
 	int getHeight();
-	//The actual hardware texture
-	SDL_Texture * mTexture;
-private:
-	//Loads image at specified path
-	SDL_Texture * generateTexture(std::string path);
-	Texture(const Texture& that) = delete;
 
+private:
+	//The actual hardware texture
+	SDL_Texture* mTexture;
 
 	//Image dimensions
 	int mWidth;

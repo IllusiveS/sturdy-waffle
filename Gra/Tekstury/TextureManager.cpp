@@ -34,7 +34,7 @@ void TextureManager::ReadTextures() {
 		std::string texName = itr.key();
 		std::string texPath = itr.value();
 		Texture * newTexture = new Texture();
-		if(newTexture->createTextureFromFile(texPath)) {
+		if(newTexture->loadFromFile(texPath)) {
 			textures.insert ( std::pair<std::string, Texture *>(texName, newTexture) );
 			printf("[suc]Created texture for %s \n", texPath.c_str());
 		} else {
