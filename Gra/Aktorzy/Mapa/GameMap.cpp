@@ -19,15 +19,19 @@ void GameMap::ReadMapFromFile(std::string path) {
 	Iterator itr = Iterator(map);
 	for( int x = 0; !itr.isNil(); x++) {
 		LuaRef value = itr.value();
-		if(value.isString()) {
-			std::string tileTypeString = itr.value();
-			LuaRef type = tilesTypes[tileTypeString];
-			std::string name = type["name"];
-			std::string texture = type["texture"];
-			MapTile * newTile = new MapTile();
-			Texture * foundTexture = Game::GetGame()->GetTextureManager()->GetTexture(texture);
-			newTile->SetupTexture(x * 32, 0, foundTexture);
-			mapElements.insert(newTile);
+		Iterator rowItr = Iterator(value);
+		for(int y = 0; !rowItr.isNil(); y++) {
+			if (rowItr.value().isString()) {
+				std::string tileTypeString = rowItr.value();
+				LuaRef type = tilesTypes[tileTypeString];
+				std::string name = type["name"];
+				std::string texture = type["texture"];
+				MapTile * newTile = new MapTile();
+				Texture * foundTexture = Game::GetGame()->GetTextureManager()->GetTexture(texture);
+				newTile->SetupTexture(y * 32, x * 32, foundTexture);
+				mapElements.insert(newTile);
+			}
+			++rowItr;
 		}
 		++itr;
 	}
