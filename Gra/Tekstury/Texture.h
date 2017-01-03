@@ -27,14 +27,13 @@ public:
 	//Gets image dimensions
 	int getWidth();
 	int getHeight();
-
-private:
-	//Loads image at specified path
-	SDL_Surface * loadFromFile(std::string path );
-	SDL_Texture * generateTexture(SDL_Surface * surface);
-
 	//The actual hardware texture
 	SDL_Texture * mTexture;
+private:
+	//Loads image at specified path
+	SDL_Texture * generateTexture(std::string path);
+	Texture(const Texture& that) = delete;
+
 
 	//Image dimensions
 	int mWidth;

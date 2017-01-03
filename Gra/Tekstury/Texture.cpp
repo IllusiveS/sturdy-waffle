@@ -14,34 +14,6 @@ Texture::~Texture() {
 	free();
 }
 
-SDL_Surface * Texture::loadFromFile(std::string path) {
-	free();
-
-	//The final optimized image
-	SDL_Surface * optimizedSurface = NULL;
-
-	//Load image at specified path
-	SDL_Surface * loadedSurface = IMG_Load( path.c_str() );
-	if( loadedSurface == NULL )
-	{
-		printf( "[err]Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError() );
-	}
-	else
-	{
-		//Convert surface to screen format
-		optimizedSurface = SDL_ConvertSurface( loadedSurface, Game::GetGame()->GetSurface()->format, 0);
-		if( optimizedSurface == NULL )
-		{
-			printf( "[err]Unable to optimize image %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
-		}
-
-		//Get rid of old loaded surface
-		SDL_FreeSurface( loadedSurface );
-	}
-
-	return optimizedSurface;
-}
-
 void Texture::free() {
 	if( mTexture != NULL )
 	{
@@ -54,7 +26,10 @@ void Texture::free() {
 
 void Texture::render(int x, int y, SDL_Renderer * renderer) {
 	SDL_Rect renderQuad = { x, y, mWidth, mHeight };
-	SDL_RenderCopy( renderer, mTexture, NULL, &renderQuad );
+	int result = SDL_RenderCopy( renderer, mTexture, NULL, &renderQuad );
+	if(result != 0){
+		printf("[err]Cant render ERROR: %s\n", SDL_GetError());
+	}
 }
 
 int Texture::getWidth() {
@@ -65,32 +40,41 @@ int Texture::getHeight() {
 	return mHeight;
 }
 
-SDL_Texture *Texture::generateTexture(SDL_Surface * loadedSurface) {
-	if(loadedSurface == NULL){
+SDL_Texture *Texture::generateTexture(std::string path) {
+	//The final texture
+	SDL_Texture* newTexture = NULL;
 
-	} else {
-		SDL_Texture * newTex = SDL_CreateTextureFromSurface(Game::GetGame()->GetRenderer(), loadedSurface);
-		if(newTex == NULL) {
-
-		} else {
-			mTexture = newTex;
-			SDL_FreeSurface(loadedSurface);
-		}
+	//Load image at specified path
+	SDL_Surface* loadedSurface = IMG_Load( path.c_str() );
+	if( loadedSurface == NULL )
+	{
+		printf( "Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError() );
 	}
+	else
+	{
+		//Create texture from surface pixels
+		newTexture = SDL_CreateTextureFromSurface( Game::GetGame()->GetRenderer(), loadedSurface );
+		if( newTexture == NULL )
+		{
+			printf( "Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
+		}
+
+		//Get rid of old loaded surface
+		SDL_FreeSurface( loadedSurface );
+	}
+
+	return newTexture;
 }
 
 bool Texture::createTextureFromFile(std::string path) {
 	bool returnValue = false;
-	SDL_Surface * surface = loadFromFile(path);
-	SDL_Texture * tex = generateTexture(surface);
+	SDL_Texture * tex = generateTexture(path);
 	if(tex == NULL) {
 		returnValue = false;
-		printf("[err]Cant generate texture %s \n", path.c_str());
 	} else {
 		returnValue = true;
-		mWidth = surface->w;
-		mHeight = surface->h;
-		printf("[suc]Created texture for %s \n", path.c_str());
+//		mWidth = surface->w;
+//		mHeight = surface->h;
 	}
 	mTexture = tex;
 	return returnValue;

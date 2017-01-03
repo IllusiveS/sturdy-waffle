@@ -10,6 +10,11 @@ int main(int argc, char * args[]) {
 	if(SDL_Init(SDL_INIT_EVERYTHING) == -1) {
 		return 1;
 	}
+	//Set texture filtering to linear
+	if( !SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" ) )
+	{
+		printf( "Warning: Linear texture filtering not enabled!" );
+	}
     Game::Setup();
 	Game * gra = Game::GetGame();
 	GameMap * mapa = new GameMap();

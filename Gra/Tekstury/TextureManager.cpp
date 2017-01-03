@@ -26,14 +26,19 @@ void TextureManager::ReadTextures() {
 	lua_pcall(L, 0, 0, 0);
 	std::cout << "ReadingTextures" << std::endl;
 	LuaRef texturesArray = getGlobal(L, "textures");
+	if(texturesArray.isNil()) {
+		printf("cant read textures array\n");
+	}
 	Iterator itr = Iterator(texturesArray);
 	for( ; !itr.isNil(); ) {
 		std::string texName = itr.key();
 		std::string texPath = itr.value();
 		Texture * newTexture = new Texture();
 		if(newTexture->createTextureFromFile(texPath)) {
-			textures[texName] = newTexture;
+			textures.insert ( std::pair<std::string, Texture *>(texName, newTexture) );
+			printf("[suc]Created texture for %s \n", texPath.c_str());
 		} else {
+			printf("[err]Cant generate texture %s \n", texPath.c_str());
 			delete newTexture;
 		}
 		++itr;

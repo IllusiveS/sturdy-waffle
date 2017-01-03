@@ -67,9 +67,6 @@ bool Game::init()
 			}
 			else
 			{
-				//Initialize renderer color
-				SDL_SetRenderDrawColor( mainRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
-
 				//Initialize PNG loading
 				int imgFlags = IMG_INIT_PNG;
 				if( !( IMG_Init( imgFlags ) & imgFlags ) )
@@ -93,13 +90,12 @@ void Game::UpdatePhysics() {
 }
 
 void Game::Render() {
-	SDL_SetRenderDrawColor( mainRenderer, 0, 0xFF, 0xFF, 0xFF );
+	//SDL_SetRenderDrawColor( mainRenderer, 0, 0xFF, 0xFF, 0xFF );
 	SDL_RenderClear(mainRenderer);
 	for(auto itr = renders.begin(); itr != renders.end(); itr++) {
 		IRenderable * renderable = *itr;
 		renderable->Render(mainRenderer);
-	}
-	SDL_RenderPresent(mainRenderer);
+	}SDL_RenderPresent(mainRenderer);
 }
 
 void Game::Setup() {
