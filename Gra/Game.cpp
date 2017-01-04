@@ -4,12 +4,13 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
+#include <LuaBridge/LuaBridge.h>
 #include "Game.h"
 
 Game * Game::gameSingleton = nullptr;
 
 void Game::UpdateInput() {
-
+	inputManager->UpdateInputs();
 }
 
 Game::Game() : isFinished(false) {
@@ -27,11 +28,12 @@ void Game::Prepare() {
 	}
 	mainSurface = surface;
 	textureManager = new TextureManager();
-	//TODO stworzenie managerów inputu i tekstur
+	inputManager = new InputManager();
 }
 
 Game::~Game() {
 	delete textureManager;
+	delete inputManager;
 }
 
 
@@ -90,12 +92,12 @@ void Game::UpdatePhysics() {
 }
 
 void Game::Render() {
-	//SDL_SetRenderDrawColor( mainRenderer, 0, 0xFF, 0xFF, 0xFF );
 	SDL_RenderClear(mainRenderer);
 	for(auto itr = renders.begin(); itr != renders.end(); itr++) {
 		IRenderable * renderable = *itr;
 		renderable->Render(mainRenderer);
-	}SDL_RenderPresent(mainRenderer);
+	}
+	SDL_RenderPresent(mainRenderer);
 }
 
 void Game::Setup() {
@@ -137,4 +139,23 @@ void Game::SubscribeTick(ITickable *tick) {
 
 void Game::SubscribeRender(IRenderable *render) {
 	renders.insert(render);
+}
+
+void Game::setupLuaState() {
+	lua_State* L = luaL_newstate();
+	luaL_openlibs(L);
+	prepareSingletonsForLua(L);
+}
+
+void Game::prepareSingletonsForLua(lua_State *L) {
+	using namespace luabridge;
+	inputManager->LuaExport(L);
+	getGlobalNamespace(L)
+		.beginClass<Game>("Game")
+			.addFunction("GetInputManager", &Game::GetInputManager)
+		.endClass();
+}
+
+InputManager *Game::GetInputManager() const {
+	return nullptr;
 }

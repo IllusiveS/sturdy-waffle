@@ -12,6 +12,7 @@
 #include <Gra/Aktorzy/Actor.h>
 #include <Gra/Aktorzy/ITickable.h>
 #include "Gra/Tekstury/TextureManager.h"
+#include "InputManager.h"
 
 class Game {
 public:
@@ -31,11 +32,13 @@ private:
 	static Game * gameSingleton;
 	Game();
 	~Game();
+	void setupLuaState();
 	//koniec singletona
 
 	//DOSTĘP DO PÓL
 public:
 	TextureManager * GetTextureManager() const;
+	InputManager * GetInputManager() const;
 	SDL_Window * GetWindow() const;
 	SDL_Renderer * GetRenderer() const;
 	SDL_Surface * GetSurface() const;
@@ -49,6 +52,8 @@ public://Zapisywanie się aktorów
 private:
 	bool init();
 
+	void prepareSingletonsForLua(lua_State * L);
+
 	std::set<ITickable *> ticks;
 	std::set<IRenderable *> renders;
 	std::set<Actor *> actors;
@@ -57,6 +62,7 @@ private:
 	SDL_Surface * mainSurface;
 	SDL_Renderer * mainRenderer;
 	TextureManager * textureManager;
+	InputManager * inputManager;
 	//TODO GameManager
 };
 
