@@ -4,8 +4,8 @@
 
 #include <lua.hpp>
 #include <Gra/Game.h>
-#include "GameMap.h"
 #include "LuaBridge/LuaBridge.h"
+#include "GameMap.h"
 
 using namespace luabridge;
 
