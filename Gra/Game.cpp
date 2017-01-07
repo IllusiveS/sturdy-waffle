@@ -4,10 +4,9 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
+#include <lua.hpp>
 #include <LuaBridge/LuaBridge.h>
 #include "Game.h"
-
-using namespace luabridge;
 
 Game * Game::gameSingleton = nullptr;
 

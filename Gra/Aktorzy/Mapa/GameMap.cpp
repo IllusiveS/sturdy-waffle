@@ -2,8 +2,8 @@
 // Created by wysockipatryk on 1/2/17.
 //
 
-#include <Gra/Game.h>
 #include <lua.hpp>
+#include <Gra/Game.h>
 #include "LuaBridge/LuaBridge.h"
 #include "GameMap.h"
 

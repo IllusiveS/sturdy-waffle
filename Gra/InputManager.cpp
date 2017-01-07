@@ -9,8 +9,6 @@
 #include <SDL_events.h>
 #include "InputManager.h"
 
-using namespace luabridge;
-
 float InputManager::IsButtonPressed(std::string key) {
 	auto it = inputs.find(key);
 	if (it != inputs.end()) {

@@ -2,7 +2,6 @@
 #include <Gra/Game.h>
 #include <SDL.h>
 #include <thread>
-//#include "LuaBridge/LuaBridge.h"
 #include <chrono>
 #include <Gra/Aktorzy/Mapa/GameMap.h>
 
