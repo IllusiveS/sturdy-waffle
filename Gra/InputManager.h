@@ -7,7 +7,7 @@
 
 #include <string>
 #include <map>
-#include <lua.h>
+#include <LuaBridge/LuaBridge.h>
 
 //Klasa do wykrywania inputu
 class InputManager {

@@ -7,6 +7,8 @@
 #include <LuaBridge/LuaBridge.h>
 #include "Game.h"
 
+using namespace luabridge;
+
 Game * Game::gameSingleton = nullptr;
 
 void Game::UpdateInput() {

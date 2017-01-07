@@ -9,15 +9,8 @@
 #include <map>
 #include <SDL_render.h>
 
-//#include <LuaBridge.h>
 #include <iostream>
 #include "Texture.h"
-
-extern "C" {
-	#include "lua.h"
-	#include "lauxlib.h"
-	#include "lualib.h"
-}
 
 //Klasa do przechowywania tekstur
 class TextureManager {

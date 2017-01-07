@@ -5,8 +5,9 @@
 #include <SDL_keycode.h>
 #include <SDL_events.h>
 #include <LuaBridge/LuaBridge.h>
-#include <lua.hpp>
 #include "InputManager.h"
+
+using namespace luabridge;
 
 float InputManager::IsButtonPressed(std::string key) {
 	auto it = inputs.find(key);

@@ -2,10 +2,9 @@
 // Created by wysockipatryk on 1/2/17.
 //
 
-#include <lua.hpp>
 #include <Gra/Game.h>
+#include <lua.hpp>
 #include "GameMap.h"
-#include "LuaBridge/LuaBridge.h"
 
 using namespace luabridge;
 
