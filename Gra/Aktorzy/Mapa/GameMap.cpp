@@ -7,9 +7,8 @@
 #include "LuaBridge/LuaBridge.h"
 #include "GameMap.h"
 
-using namespace luabridge;
-
 void GameMap::ReadMapFromFile(std::string path) {
+	using namespace luabridge;
 	lua_State *L = luaL_newstate();
 	luaL_dofile(L, path.c_str());
 	luaL_openlibs(L);

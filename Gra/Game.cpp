@@ -158,5 +158,5 @@ void Game::prepareSingletonsForLua(lua_State *L) {
 }
 
 InputManager *Game::GetInputManager() const {
-	return nullptr;
+	return inputManager;
 }

@@ -2,13 +2,11 @@
 // Created by wysockipatryk on 12/26/16.
 //
 
-#include "TextureManager.h"
 #include <iostream>
 #include <SDL_image.h>
 #include <lua.hpp>
 #include "LuaBridge/LuaBridge.h"
-
-using namespace luabridge;
+#include "TextureManager.h"
 
 Texture * TextureManager::GetTexture(std::string nazwaTextury) const {
 	Texture * texToReturn = textures.at(nazwaTextury);
@@ -20,6 +18,7 @@ TextureManager::TextureManager() {
 }
 
 void TextureManager::ReadTextures() {
+	using namespace luabridge;
 	textures = std::map<std::string, Texture *>();
 	lua_State *L = luaL_newstate();
 	luaL_dofile(L, "Lua/Textures.lua");
