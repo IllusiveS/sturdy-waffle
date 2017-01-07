@@ -4,7 +4,9 @@
 
 #include <SDL_keycode.h>
 #include <SDL_events.h>
+#include <lua.hpp>
 #include <LuaBridge/LuaBridge.h>
+#include <SDL_events.h>
 #include "InputManager.h"
 
 using namespace luabridge;
@@ -16,7 +18,6 @@ float InputManager::IsButtonPressed(std::string key) {
 	} else {
 		return 0;
 	}
-
 }
 
 void InputManager::UpdateInputs() {
@@ -53,7 +54,6 @@ void InputManager::UpdateInputs() {
 			}
 		}
 	}
-
 }
 
 InputManager::InputManager() {

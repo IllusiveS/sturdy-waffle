@@ -5,6 +5,7 @@
 #include "TextureManager.h"
 #include <iostream>
 #include <SDL_image.h>
+#include <lua.hpp>
 #include "LuaBridge/LuaBridge.h"
 
 using namespace luabridge;
