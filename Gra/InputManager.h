@@ -9,7 +9,7 @@
 class InputManager {
 public:
 	//TODO funkcja to zrobienia statyczną
-	bool IsButtonPressed(/*tutaj buton, może jakiego enuma?*/);
+
 };
 
 
