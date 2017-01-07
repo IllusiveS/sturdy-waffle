@@ -32,19 +32,19 @@ void InputManager::UpdateInputs() {
 			//Select surfaces based on key press
 			switch (e.key.keysym.sym) {
 				case SDLK_UP:
-					setInputValue("up", 1);
+					addInputValue("up", 1);
 					break;
 
 				case SDLK_DOWN:
-					setInputValue("up", -1);
+					addInputValue("up", -1);
 					break;
 
 				case SDLK_LEFT:
-					setInputValue("right", -1);
+					addInputValue("right", -1);
 					break;
 
 				case SDLK_RIGHT:
-					setInputValue("right", 1);
+					addInputValue("right", 1);
 					break;
 
 				default:
@@ -60,6 +60,13 @@ InputManager::InputManager() {
 }
 
 void InputManager::setInputValue(std::string key, float value) {
+	auto it = inputs.find(key);
+	if (it != inputs.end())
+		it->second = it->second;
+}
+
+
+void InputManager::addInputValue(std::string key, float value) {
 	auto it = inputs.find(key);
 	if (it != inputs.end())
 		it->second = value + it->second;

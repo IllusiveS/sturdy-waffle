@@ -10,6 +10,7 @@ void Vector2::ExportLua(lua_State *L) {
 	getGlobalNamespace (L)
 	.beginNamespace ("math")
 			.beginClass <Vector2> ("Vector2")
+			.addConstructor <void (*) (double, double)> ()
 			.addData ("x", &Vector2::x)
 			.addData ("y", &Vector2::y)
 			.addFunction ("add", &Vector2::add)

@@ -20,6 +20,7 @@ public:
 	void UpdateInputs();
 private:
 	std::map<std::string, float> inputs;
+	void addInputValue(std::string key, float value);
 	void setInputValue(std::string key, float value);
 };
 

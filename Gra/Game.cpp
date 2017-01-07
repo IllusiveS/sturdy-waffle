@@ -6,6 +6,7 @@
 #include <SDL_image.h>
 #include <lua.hpp>
 #include <LuaBridge/LuaBridge.h>
+#include <Gra/Matma/Vector2.h>
 #include "Game.h"
 
 Game * Game::gameSingleton = nullptr;
@@ -151,6 +152,7 @@ void Game::setupLuaState() {
 void Game::prepareSingletonsForLua(lua_State *L) {
 	using namespace luabridge;
 	inputManager->LuaExport(L);
+	Vector2::ExportLua(L);
 	getGlobalNamespace(L)
 		.beginClass<Game>("Game")
 			.addFunction("GetInputManager", &Game::GetInputManager)
