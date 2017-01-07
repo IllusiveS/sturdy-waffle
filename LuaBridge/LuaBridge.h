@@ -101,8 +101,8 @@ private:
 };
 
 #include "detail/Userdata.h"
-#include "detail/Namespace.h"
 #include "detail/CFunctions.h"
+#include "detail/Namespace.h"
 
 
 //------------------------------------------------------------------------------
