@@ -3,7 +3,8 @@
 //
 
 #include <Gra/Game.h>
-//#include <lua.hpp>
+#include <lua.hpp>
+#include "LuaBridge/LuaBridge.h"
 #include "GameMap.h"
 
 using namespace luabridge;
