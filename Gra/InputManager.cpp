@@ -72,7 +72,7 @@ void InputManager::addInputValue(std::string key, float value) {
 		it->second = value + it->second;
 }
 
-void InputManager::LuaExport(lua_State *L) {
+void InputManager::ExportLua(lua_State *L) {
 	using namespace luabridge;
 	getGlobalNamespace(L)
 			.beginNamespace("InputManager")

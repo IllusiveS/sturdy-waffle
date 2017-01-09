@@ -7,6 +7,7 @@
 #include <lua.hpp>
 #include <LuaBridge/LuaBridge.h>
 #include <Gra/Matma/Vector2.h>
+#include <Gra/Aktorzy/Player/Player.h>
 #include "Game.h"
 
 Game * Game::gameSingleton = nullptr;
@@ -31,11 +32,16 @@ void Game::Prepare() {
 	mainSurface = surface;
 	textureManager = new TextureManager();
 	inputManager = new InputManager();
+
 }
 
 Game::~Game() {
 	delete textureManager;
 	delete inputManager;
+	for(auto itr = actors.begin(); itr != actors.end(); itr++) {
+		Actor * actor = *itr;
+		delete actor;
+	}
 }
 
 
@@ -85,12 +91,18 @@ bool Game::init()
 	return success;
 }
 
-void Game::UpdateTick() {
-
+void Game::UpdateTick(float delta) {
+	for(auto itr = ticks.begin(); itr != ticks.end(); itr++) {
+		ITickable * tickable = *itr;
+		tickable->Tick(delta);
+	}
 }
 
-void Game::UpdatePhysics() {
-
+void Game::UpdatePhysics(float delta) {
+	for(auto itr = physics.begin(); itr != physics.end(); itr++) {
+		IPhisicsable * phi = *itr;
+		phi->CalculatePhisics(delta);
+	}
 }
 
 void Game::Render() {
@@ -151,14 +163,25 @@ void Game::setupLuaState() {
 
 void Game::prepareSingletonsForLua(lua_State *L) {
 	using namespace luabridge;
-	inputManager->LuaExport(L);
+	inputManager->ExportLua(L);
 	Vector2::ExportLua(L);
+	Player::ExportLua(L);
+	ExportLua(L);
+}
+
+void Game::ExportLua(lua_State *L) {
+	using namespace luabridge;
 	getGlobalNamespace(L)
-		.beginClass<Game>("Game")
-			.addFunction("GetInputManager", &Game::GetInputManager)
-		.endClass();
+			.beginClass<Game>("Game")
+			.addStaticFunction ("getGame", &Game::GetGame)
+			.addFunction("getInputManager", &Game::GetInputManager)
+			.endClass();
 }
 
 InputManager *Game::GetInputManager() const {
 	return inputManager;
+}
+
+void Game::SubscribePhysics(IPhisicsable * phi) {
+	physics.insert(phi);
 }

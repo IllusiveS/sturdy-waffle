@@ -14,7 +14,7 @@
 class InputManager {
 public:
 	InputManager();
-	void LuaExport(lua_State *L);
+	void ExportLua(lua_State *L);
 	//TODO funkcja to zrobienia statyczną
 	float IsButtonPressed(std::string key);
 	void UpdateInputs();

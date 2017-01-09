@@ -21,8 +21,8 @@ int main(int argc, char * args[]) {
 	mapa->ReadMapFromFile("Lua/Map.lua");
 	for( ; !gra->isFinished; ) {
 		gra->UpdateInput();
-		gra->UpdateTick();
-		gra->UpdatePhysics();
+		gra->UpdateTick(0);
+		gra->UpdatePhysics(0);
 		gra->Render();
 		std::chrono::seconds sec(1);
 		std::this_thread::sleep_for(sec);

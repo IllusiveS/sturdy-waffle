@@ -7,9 +7,10 @@
 
 
 class ITickable {
+public:
 	ITickable();
 
-	virtual void Tick() = 0;
+	virtual void Tick(float delta) = 0;
 };
 
 #endif //SDLPODSTAWA_ITICKABLE_H

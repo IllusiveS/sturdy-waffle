@@ -11,6 +11,7 @@
 #include <set>
 #include <Gra/Aktorzy/Actor.h>
 #include <Gra/Aktorzy/ITickable.h>
+#include <Gra/Aktorzy/IPhisicsable.h>
 #include "Gra/Tekstury/TextureManager.h"
 #include "InputManager.h"
 
@@ -21,8 +22,8 @@ public:
 	static void Close();
 	bool isFinished;
 	void UpdateInput();
-	void UpdateTick();
-	void UpdatePhysics();
+	void UpdateTick(float delta);
+	void UpdatePhysics(float delta);
 	void Render();
 
 	//SINGLETON
@@ -47,6 +48,7 @@ public:
 public://Zapisywanie się aktorów
 	void SubscribeActor(Actor * actor);
 	void SubscribeTick(ITickable * tick);
+	void SubscribePhysics(IPhisicsable * phi);
 	void SubscribeRender(IRenderable * render);
 
 private:
@@ -56,6 +58,7 @@ private:
 
 	std::set<ITickable *> ticks;
 	std::set<IRenderable *> renders;
+	std::set<IPhisicsable *> physics;
 	std::set<Actor *> actors;
 
 	SDL_Window * mainWindow;
@@ -64,6 +67,7 @@ private:
 	TextureManager * textureManager;
 	InputManager * inputManager;
 	//TODO GameManager
+	void ExportLua(lua_State *L);
 };
 
 
