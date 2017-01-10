@@ -24,8 +24,6 @@ int main(int argc, char * args[]) {
 		gra->UpdateTick(0);
 		gra->UpdatePhysics(0);
 		gra->Render();
-		std::chrono::seconds sec(1);
-		std::this_thread::sleep_for(sec);
 	}
 	//Odpalamy pętlę
 		//Sprawdzamy input

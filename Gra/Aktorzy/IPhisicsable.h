@@ -9,6 +9,7 @@
 class IPhisicsable {
 public:
 	IPhisicsable();
+	~IPhisicsable();
 
 	virtual void CalculatePhisics(float delta) = 0;
 };

@@ -8,5 +8,6 @@
 
 textures = {
     grass = "Textures/Grass.png",
-    wall = "Textures/Wall.png"
+    wall = "Textures/Wall.png",
+    player = "Textures/Player.png"
 }

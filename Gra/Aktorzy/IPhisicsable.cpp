@@ -6,5 +6,9 @@
 #include "IPhisicsable.h"
 
 IPhisicsable::IPhisicsable() {
-	Game::GetGame();
+	Game::GetGame()->SubscribePhysics(this);
+}
+
+IPhisicsable::~IPhisicsable() {
+
 }

@@ -3,10 +3,11 @@
 //
 
 #include <iostream>
+#include <Gra/Game.h>
 #include "Player.h"
 
-Player::Player() : x(0), y(0), dx(0), dy(0), speed(100) {
-
+Player::Player() : x(0), y(0), dx(0), dy(0), speed(100), IRenderable(), ITickable(), IPhisicsable() {
+	tex = Game::GetGame()->GetTextureManager()->GetTexture("player");
 }
 
 void Player::Move(Vector2 vec) {
@@ -52,6 +53,8 @@ void Player::ReadScript(lua_State *L) {
 void Player::CalculatePhisics(float delta) {
 	x += dx;
 	y += dy;
+	dx = dx / 2;
+	dy = dy / 2;
 }
 
 void Player::Position(Vector2 vec) {

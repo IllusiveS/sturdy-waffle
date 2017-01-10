@@ -32,7 +32,9 @@ void Game::Prepare() {
 	mainSurface = surface;
 	textureManager = new TextureManager();
 	inputManager = new InputManager();
-
+	setupLuaState();
+	Player * player = new Player();
+	player->ReadScript(L);
 }
 
 Game::~Game() {
@@ -157,11 +159,12 @@ void Game::SubscribeRender(IRenderable *render) {
 
 void Game::setupLuaState() {
 	lua_State* L = luaL_newstate();
+	this->L = L;
 	luaL_openlibs(L);
-	prepareSingletonsForLua(L);
+	prepareClassesForLua(L);
 }
 
-void Game::prepareSingletonsForLua(lua_State *L) {
+void Game::prepareClassesForLua(lua_State *L) {
 	using namespace luabridge;
 	inputManager->ExportLua(L);
 	Vector2::ExportLua(L);
@@ -184,4 +187,22 @@ InputManager *Game::GetInputManager() const {
 
 void Game::SubscribePhysics(IPhisicsable * phi) {
 	physics.insert(phi);
+}
+
+void Game::UnSubscribeActor(Actor *actor) {
+	Actor * actorToRemove = actor;
+	actors.erase(actor);
+	delete actor;
+}
+
+void Game::UnSubscribeTick(ITickable *tick) {
+	ticks.erase(tick);
+}
+
+void Game::UnSubscribePhysics(IPhisicsable *phi) {
+	physics.erase(phi);
+}
+
+void Game::UnSubscribeRender(IRenderable *render) {
+	renders.erase(render);
 }

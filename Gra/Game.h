@@ -51,10 +51,15 @@ public://Zapisywanie się aktorów
 	void SubscribePhysics(IPhisicsable * phi);
 	void SubscribeRender(IRenderable * render);
 
+	void UnSubscribeActor(Actor * actor);
+	void UnSubscribeTick(ITickable * tick);
+	void UnSubscribePhysics(IPhisicsable * phi);
+	void UnSubscribeRender(IRenderable * render);
+
 private:
 	bool init();
-
-	void prepareSingletonsForLua(lua_State * L);
+	lua_State * L;
+	void prepareClassesForLua(lua_State *L);
 
 	std::set<ITickable *> ticks;
 	std::set<IRenderable *> renders;

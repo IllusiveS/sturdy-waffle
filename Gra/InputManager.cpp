@@ -6,7 +6,6 @@
 #include <SDL_events.h>
 #include <lua.hpp>
 #include <LuaBridge/LuaBridge.h>
-#include <SDL_events.h>
 #include "InputManager.h"
 
 float InputManager::IsButtonPressed(std::string key) {
@@ -32,11 +31,11 @@ void InputManager::UpdateInputs() {
 			//Select surfaces based on key press
 			switch (e.key.keysym.sym) {
 				case SDLK_UP:
-					addInputValue("up", 1);
+					addInputValue("up", -1);
 					break;
 
 				case SDLK_DOWN:
-					addInputValue("up", -1);
+					addInputValue("up", 1);
 					break;
 
 				case SDLK_LEFT:
@@ -62,7 +61,7 @@ InputManager::InputManager() {
 void InputManager::setInputValue(std::string key, float value) {
 	auto it = inputs.find(key);
 	if (it != inputs.end())
-		it->second = it->second;
+		it->second = value;
 }
 
 

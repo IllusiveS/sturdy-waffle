@@ -8,7 +8,7 @@
 void Vector2::ExportLua(lua_State *L) {
 	using namespace luabridge;
 	getGlobalNamespace (L)
-	.beginNamespace ("math")
+	.beginNamespace ("MATH")
 			.beginClass <Vector2> ("Vector2")
 			.addConstructor <void (*) (double, double)> ()
 			.addData ("x", &Vector2::x)
