@@ -13,7 +13,6 @@ Player::Player() : speed(100), IRenderable(), ITickable(), IPhysicsable() {
 void Player::Move(Vector2 vec) {
 	speedVector.x = vec.x;
 	speedVector.y = vec.y;
-	std::cout << "Movement: " << speedVector.x << ", " << speedVector.y << std::endl;
 }
 
 
