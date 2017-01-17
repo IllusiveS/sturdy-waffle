@@ -6,6 +6,7 @@
 #include <SDL_events.h>
 #include <lua.hpp>
 #include <LuaBridge/LuaBridge.h>
+#include <iostream>
 #include "InputManager.h"
 
 float InputManager::IsButtonPressed(std::string key) {
@@ -19,38 +20,57 @@ float InputManager::IsButtonPressed(std::string key) {
 
 void InputManager::UpdateInputs() {
 	SDL_Event e;
+	SDL_PumpEvents();
 	setInputValue("up", 0);
 	setInputValue("right", 0);
-	while (SDL_PollEvent(&e) != 0) {
-		//User requests quit
-		if (e.type == SDL_QUIT) {
-			//Wychodzimy
-		}
-			//User presses a key
-		else if (e.type == SDL_KEYDOWN) {
-			//Select surfaces based on key press
-			switch (e.key.keysym.sym) {
-				case SDLK_UP:
-					addInputValue("up", -1);
-					break;
 
-				case SDLK_DOWN:
-					addInputValue("up", 1);
-					break;
-
-				case SDLK_LEFT:
-					addInputValue("right", -1);
-					break;
-
-				case SDLK_RIGHT:
-					addInputValue("right", 1);
-					break;
-
-				default:
-					break;
-			}
-		}
+	const Uint8 *state = SDL_GetKeyboardState(NULL);
+	if (state[SDLK_RETURN]) {
+		printf("<RETURN> is pressed.\n");
 	}
+	if (state[SDL_SCANCODE_RIGHT]) {
+		addInputValue("right", 1);
+	}
+	if (state[SDL_SCANCODE_LEFT]) {
+		addInputValue("right", -1);
+	}
+	if (state[SDL_SCANCODE_UP]) {
+		addInputValue("up", -1);
+	}
+	if (state[SDL_SCANCODE_DOWN]) {
+		addInputValue("up", 1);
+	}
+
+//	while (SDL_PollEvent(&e) != 0) {
+//		//User requests quit
+//		if (e.type == SDL_QUIT) {
+//			//Wychodzimy
+//		}
+//			//User presses a key
+//		else if (e.type == SDL_KEYDOWN) {
+//			//Select surfaces based on key press
+//			switch (e.key.keysym.sym) {
+//				case SDLK_UP:
+//					addInputValue("up", -1);
+//					break;
+//
+//				case SDLK_DOWN:
+//					addInputValue("up", 1);
+//					break;
+//
+//				case SDLK_LEFT:
+//					addInputValue("right", -1);
+//					break;
+//
+//				case SDLK_RIGHT:
+//					addInputValue("right", 1);
+//					break;
+//
+//				default:
+//					break;
+//			}
+//		}
+//	}
 }
 
 InputManager::InputManager() {

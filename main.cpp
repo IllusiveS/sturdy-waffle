@@ -21,8 +21,9 @@ int main(int argc, char * args[]) {
 	mapa->ReadMapFromFile("Lua/Map.lua");
 	for( ; !gra->isFinished; ) {
 		gra->UpdateInput();
-		gra->UpdateTick(0);
-		gra->UpdatePhysics(0);
+		float delta = (float)1 / (float) 60;
+		gra->UpdateTick(delta);
+		gra->UpdatePhysics(delta);
 		gra->Render();
 	}
 	//Odpalamy pętlę

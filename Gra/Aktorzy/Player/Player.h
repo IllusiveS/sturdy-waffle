@@ -10,11 +10,11 @@
 #include <Gra/Aktorzy/Actor.h>
 #include <Gra/Matma/Vector2.h>
 #include <Gra/Aktorzy/IRenderable.h>
-#include <Gra/Aktorzy/IPhisicsable.h>
+#include <Gra/Aktorzy/IPhysicsable.h>
 #include <Gra/Tekstury/Texture.h>
 #include <memory>
 
-class Player : private Actor, private ITickable, private IRenderable, private IPhisicsable {
+class Player : private Actor, private ITickable, private IRenderable, private IPhysicsable {
 public:
 	Player();
 	void Move(Vector2 vec);
@@ -28,15 +28,11 @@ public:
 private:
 	Texture * tex;
 	float speed;
-	int x, y;
-	double dx, dy;
 private:
 	void Render(SDL_Renderer *renderer) override;
 
 	void Tick(float delta) override;
 	std::shared_ptr<luabridge::LuaRef> tickFunc;
-
-	void CalculatePhisics(float delta) override;
 };
 
 

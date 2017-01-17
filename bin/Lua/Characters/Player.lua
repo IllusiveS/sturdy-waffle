@@ -7,12 +7,15 @@
 --
 
 player = {
-    speed = 100,
+    speed = 150,
     tick = function(player, delta)
         local InputX = Game:getGame():getInputManager():checkInput("right")
         local InputY = Game:getGame():getInputManager():checkInput("up")
-        local InputVector = MATH.Vector2(InputX, InputY)
-        player:move(InputVector)
+        local Xmovement = delta * InputX
+        local YMovement = delta * InputY
+        local InputVector = MATH.Vector2(Xmovement, YMovement)
+        local NormalizedVector = InputVector:normalized()
+        player:move(InputVector:multiplyByScalar(player.speed))
     end
 }
 

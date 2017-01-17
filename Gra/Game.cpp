@@ -102,8 +102,8 @@ void Game::UpdateTick(float delta) {
 
 void Game::UpdatePhysics(float delta) {
 	for(auto itr = physics.begin(); itr != physics.end(); itr++) {
-		IPhisicsable * phi = *itr;
-		phi->CalculatePhisics(delta);
+		IPhysicsable * phi = *itr;
+		phi->CalculatePhysics(delta);
 	}
 }
 
@@ -185,7 +185,7 @@ InputManager *Game::GetInputManager() const {
 	return inputManager;
 }
 
-void Game::SubscribePhysics(IPhisicsable * phi) {
+void Game::SubscribePhysics(IPhysicsable * phi) {
 	physics.insert(phi);
 }
 
@@ -199,7 +199,7 @@ void Game::UnSubscribeTick(ITickable *tick) {
 	ticks.erase(tick);
 }
 
-void Game::UnSubscribePhysics(IPhisicsable *phi) {
+void Game::UnSubscribePhysics(IPhysicsable *phi) {
 	physics.erase(phi);
 }
 

@@ -6,18 +6,19 @@
 #include <Gra/Game.h>
 #include "Player.h"
 
-Player::Player() : x(0), y(0), dx(0), dy(0), speed(100), IRenderable(), ITickable(), IPhisicsable() {
+Player::Player() : speed(100), IRenderable(), ITickable(), IPhysicsable() {
 	tex = Game::GetGame()->GetTextureManager()->GetTexture("player");
 }
 
 void Player::Move(Vector2 vec) {
-	dx = vec.x;
-	dy = vec.y;
+	speedVector.x = vec.x;
+	speedVector.y = vec.y;
+	std::cout << "Movement: " << speedVector.x << ", " << speedVector.y << std::endl;
 }
 
 
 void Player::Render(SDL_Renderer *renderer) {
-	tex->render(x, y);
+	tex->render((int)position.x, (int)position.y);
 }
 
 void Player::Tick(float delta) {
@@ -36,8 +37,8 @@ void Player::ReadScript(lua_State *L) {
 	if (luaL_dofile(L, "Lua/Characters/Player.lua") == 0) { // script has opened
 		LuaRef table = getGlobal(L, "player");
 		if (table.isTable()) {
-			if (table["speed"].isNumber()) {
-				speed = table["speed"];
+			if (table["speedVector"].isNumber()) {
+				speed = table["speedVector"];
 			}
 			if (table["tick"].isFunction()) {
 				tickFunc = std::make_shared<LuaRef>(table["tick"]);
@@ -50,16 +51,9 @@ void Player::ReadScript(lua_State *L) {
 	}
 }
 
-void Player::CalculatePhisics(float delta) {
-	x += dx;
-	y += dy;
-	dx = dx / 2;
-	dy = dy / 2;
-}
-
 void Player::Position(Vector2 vec) {
-	this->x = (int)vec.x;
-	this->y = (int)vec.y;
+	this->position.x = (int)vec.x;
+	this->position.y = (int)vec.y;
 }
 
 void Player::SetSpeed(float speed) {

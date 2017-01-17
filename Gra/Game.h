@@ -11,7 +11,7 @@
 #include <set>
 #include <Gra/Aktorzy/Actor.h>
 #include <Gra/Aktorzy/ITickable.h>
-#include <Gra/Aktorzy/IPhisicsable.h>
+#include <Gra/Aktorzy/IPhysicsable.h>
 #include "Gra/Tekstury/TextureManager.h"
 #include "InputManager.h"
 
@@ -48,12 +48,12 @@ public:
 public://Zapisywanie się aktorów
 	void SubscribeActor(Actor * actor);
 	void SubscribeTick(ITickable * tick);
-	void SubscribePhysics(IPhisicsable * phi);
+	void SubscribePhysics(IPhysicsable * phi);
 	void SubscribeRender(IRenderable * render);
 
 	void UnSubscribeActor(Actor * actor);
 	void UnSubscribeTick(ITickable * tick);
-	void UnSubscribePhysics(IPhisicsable * phi);
+	void UnSubscribePhysics(IPhysicsable * phi);
 	void UnSubscribeRender(IRenderable * render);
 
 private:
@@ -63,7 +63,7 @@ private:
 
 	std::set<ITickable *> ticks;
 	std::set<IRenderable *> renders;
-	std::set<IPhisicsable *> physics;
+	std::set<IPhysicsable *> physics;
 	std::set<Actor *> actors;
 
 	SDL_Window * mainWindow;

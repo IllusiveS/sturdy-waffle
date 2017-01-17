@@ -20,6 +20,7 @@ public:
 
 	Vector2 add(Vector2 vec);
 	Vector2 multiply(Vector2 vec);
+	Vector2 multiplyByScalar(double scal);
 	Vector2 normalized();
 	double length();
 };
