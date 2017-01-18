@@ -8,6 +8,7 @@
 
 #include <Gra/Matma/Vector2.h>
 #include <Gra/Aktorzy/Collisions/AABB.h>
+#include <Gra/Aktorzy/Collisions/SweepData.h>
 
 class IPhysicsable {
 public:
@@ -26,6 +27,12 @@ public:
 	double rotation;
 
 	virtual void CalculatePhysics(float delta);
+	void collide(IPhysicsable * coll);
+
+	SweepData getBeginSweepData();
+	SweepData getEndSweepData();
+
+	bool checkCollision(IPhysicsable * other);
 };
 
 #endif //SDLPODSTAWA_EXE_IPHISICSABLE_H

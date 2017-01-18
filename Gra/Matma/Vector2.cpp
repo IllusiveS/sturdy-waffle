@@ -34,7 +34,6 @@ Vector2 Vector2::multiplyByScalar(double scal) {
 	return Vector2(x * scal, y * scal);
 }
 
-
 Vector2 Vector2::normalized() {
 	double len = length();
 	if(len == 0) {

@@ -18,3 +18,20 @@ void IPhysicsable::CalculatePhysics(float delta) {
 	oldSpeed = speedVector;
 	position = position.add(speedVector);
 }
+
+SweepData IPhysicsable::getBeginSweepData() {
+	return SweepData(this, position.x, true);
+}
+
+SweepData IPhysicsable::getEndSweepData() {
+	return SweepData(this, position.x, false);
+}
+
+void IPhysicsable::collide(IPhysicsable *coll) {
+
+}
+
+bool IPhysicsable::checkCollision(IPhysicsable * other) {
+	return aabb.Overlaps(other->aabb);
+}
+
