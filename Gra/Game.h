@@ -15,6 +15,8 @@
 #include "Gra/Tekstury/TextureManager.h"
 #include "InputManager.h"
 
+class CollisionManager;
+
 class Game {
 public:
 	static void Setup();
@@ -71,6 +73,7 @@ private:
 	SDL_Renderer * mainRenderer;
 	TextureManager * textureManager;
 	InputManager * inputManager;
+	CollisionManager * collisionManager;
 	//TODO GameManager
 	void ExportLua(lua_State *L);
 };

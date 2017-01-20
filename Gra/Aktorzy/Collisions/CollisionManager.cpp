@@ -21,6 +21,7 @@ void CollisionManager::processPhysics(float delta) {
 	std::set<SweepData> sweepData;
 	for(auto itr = objects.begin(); itr != objects.end(); itr++) {
 		IPhysicsable * object = *itr;
+		object->CalculatePhysics(delta);
 		sweepData.insert(object->getBeginSweepData());
 		sweepData.insert(object->getEndSweepData());
 	}
@@ -28,7 +29,7 @@ void CollisionManager::processPhysics(float delta) {
 	//TODO zamienić SweepData na IPhysicsable w tym miejscu
 	std::map<SweepData, std::list<SweepData>> intersections;
 
-	std::list<std::future<void>> futures = std::list<std::future<void>>();
+	std::list<std::future<int>> futures = std::list<std::future<int>>();
 
 	for(auto itr = sweepData.begin(); itr != sweepData.end(); itr++) {
 		SweepData currentData = *itr;
@@ -37,31 +38,31 @@ void CollisionManager::processPhysics(float delta) {
 				std::pair<SweepData, std::list<SweepData>> beginData = *dataItr;
 				beginData.second.push_back(currentData);
 			}
-			intersections.insert(std::pair(currentData, std::list<SweepData>()));
+			intersections.insert(std::pair<SweepData, std::list<SweepData>>(currentData, std::list<SweepData>()));
 		} else {
-			auto finalDataIterator = std::find_if(intersections.begin(), intersections.end(), [currentData](const SweepData data) {
-				return data.collider == currentData.collider;
+			auto finalDataIterator = std::find_if(intersections.begin(), intersections.end(), [currentData]
+					(const std::pair<SweepData, std::list<SweepData>> data) {
+				return data.first.collider == currentData.collider;
 			});
 			std::pair<SweepData, std::list<SweepData>> finalSet = *finalDataIterator;
 			intersections.erase(finalDataIterator);
-			//TODO sprawdzenie kolzji na finalSet lambdą futurem i wątkiem
 			futures.push_back(std::async(std::launch::async, [finalSet](){
-				//TODO sprawdzenie każdego z każdym i wywołanie kolzji
 				SweepData dataToCheck = finalSet.first;
 				std::list<SweepData> listToSweep = finalSet.second;
 
-				std::for_each(listToSweep.begin(), listToSweep.end(),[](SweepData currentChecked){
+				std::for_each(listToSweep.begin(), listToSweep.end(),[=](SweepData currentChecked){
 					if(currentChecked.collider->checkCollision(dataToCheck.collider)) {
 						currentChecked.collider->collide(dataToCheck.collider);
 						dataToCheck.collider->collide(currentChecked.collider);
 					}
 				});
-
 				return 0;
 			}));
 		}
 	}
-
+	std::for_each(futures.begin(), futures.end(), [](std::future<int> &future) {
+		future.get();
+	});
 
 }
 

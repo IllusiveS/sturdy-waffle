@@ -31,6 +31,8 @@ private:
 private:
 	void Render(SDL_Renderer *renderer) override;
 
+	void collide(IPhysicsable *coll) override;
+
 	void Tick(float delta) override;
 	std::shared_ptr<luabridge::LuaRef> tickFunc;
 };

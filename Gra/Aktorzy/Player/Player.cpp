@@ -75,3 +75,8 @@ void Player::ExportLua(lua_State *L) {
 			.endNamespace();
 }
 
+void Player::collide(IPhysicsable *coll) {
+	std::cout << "gracz ma kolizję" << std::endl;
+
+}
+

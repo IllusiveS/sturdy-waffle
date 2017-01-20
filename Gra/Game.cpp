@@ -8,6 +8,8 @@
 #include <LuaBridge/LuaBridge.h>
 #include <Gra/Matma/Vector2.h>
 #include <Gra/Aktorzy/Player/Player.h>
+#include <Gra/Aktorzy/TestCollider/TestCollider.h>
+#include <Gra/Aktorzy/Collisions/CollisionManager.h>
 #include "Game.h"
 
 Game * Game::gameSingleton = nullptr;
@@ -32,9 +34,11 @@ void Game::Prepare() {
 	mainSurface = surface;
 	textureManager = new TextureManager();
 	inputManager = new InputManager();
+	collisionManager = new CollisionManager();
 	setupLuaState();
 	Player * player = new Player();
 	player->ReadScript(L);
+	TestCollider * coll = new TestCollider();
 }
 
 Game::~Game() {
@@ -101,10 +105,7 @@ void Game::UpdateTick(float delta) {
 }
 
 void Game::UpdatePhysics(float delta) {
-	for(auto itr = physics.begin(); itr != physics.end(); itr++) {
-		IPhysicsable * phi = *itr;
-		phi->CalculatePhysics(delta);
-	}
+	collisionManager->processPhysics(delta);
 }
 
 void Game::Render() {
@@ -186,10 +187,11 @@ InputManager *Game::GetInputManager() const {
 }
 
 void Game::SubscribePhysics(IPhysicsable * phi) {
-	physics.insert(phi);
+	collisionManager->subscribePhysicable(phi);
 }
 
 void Game::UnSubscribeActor(Actor *actor) {
+	//TODO zrobić usuwanie po ticku, żeby nic się nie jebło
 	Actor * actorToRemove = actor;
 	actors.erase(actor);
 	delete actor;
@@ -200,7 +202,7 @@ void Game::UnSubscribeTick(ITickable *tick) {
 }
 
 void Game::UnSubscribePhysics(IPhysicsable *phi) {
-	physics.erase(phi);
+	collisionManager->unSubscribePhysicable(phi);
 }
 
 void Game::UnSubscribeRender(IRenderable *render) {

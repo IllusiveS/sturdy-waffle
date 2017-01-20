@@ -27,7 +27,7 @@ public:
 	double rotation;
 
 	virtual void CalculatePhysics(float delta);
-	void collide(IPhysicsable * coll);
+	virtual void collide(IPhysicsable * coll) = 0;
 
 	SweepData getBeginSweepData();
 	SweepData getEndSweepData();
