@@ -13,7 +13,22 @@ SweepData::~SweepData() {
 
 }
 
+bool SweepData::operator==(const SweepData &data) const {
+	return pos == data.pos;
+}
+
 bool SweepData::operator<(const SweepData &rhs) const {
+	if(*this == rhs) {
+		if(this->isBegin && rhs.isBegin) {
+			return true;
+		} else if (!this->isBegin && rhs.isBegin) {
+			return false;
+		} else if (this->isBegin && !rhs.isBegin) {
+			return true;
+		} else if (!this->isBegin && !rhs.isBegin) {
+			return false;
+		}
+	}
 	return pos < rhs.pos;
 }
 

@@ -15,12 +15,10 @@ struct SweepData {
 	int pos;
 	bool isBegin;
 
+	bool operator==(const SweepData &rhs) const;
 	bool operator<(const SweepData &rhs) const;
-
 	bool operator>(const SweepData &rhs) const;
-
 	bool operator<=(const SweepData &rhs) const;
-
 	bool operator>=(const SweepData &rhs) const;
 };
 
