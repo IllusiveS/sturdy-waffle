@@ -59,8 +59,12 @@ public://Zapisywanie się aktorów
 	void UnSubscribePhysics(IPhysicsable * phi);
 	void UnSubscribeRender(IRenderable * render);
 
+
 	int SCREEN_WIDTH = 800;
 	int SCREEN_HEIGHT = 600;
+
+	void RemoveUnusedActors();
+
 
 private:
 	bool init();
@@ -69,8 +73,8 @@ private:
 
 	std::set<ITickable *> ticks;
 	std::set<IRenderable *> renders;
-	std::set<IPhysicsable *> physics;
 	std::set<Actor *> actors;
+	std::set<Actor *> actorsToBeRemoved;
 
 	SDL_Window * mainWindow;
 	SDL_Surface * mainSurface;

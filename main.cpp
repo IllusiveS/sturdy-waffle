@@ -36,6 +36,7 @@ int main(int argc, char *args[]) {
 
         gra->UpdateInput();
         gra->UpdateTick(delta);
+        gra->RemoveUnusedActors();
         gra->UpdatePhysics(delta);
         gra->Render();
 
