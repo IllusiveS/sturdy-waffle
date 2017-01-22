@@ -23,6 +23,7 @@ int main(int argc, char * args[]) {
 		gra->UpdateInput();
 		float delta = (float)1 / (float) 60;
 		gra->UpdateTick(delta);
+		gra->RemoveUnusedActors();
 		gra->UpdatePhysics(delta);
 		gra->Render();
 	}

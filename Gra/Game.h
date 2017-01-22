@@ -58,7 +58,7 @@ public://Zapisywanie się aktorów
 	void UnSubscribePhysics(IPhysicsable * phi);
 	void UnSubscribeRender(IRenderable * render);
 
-	void RemoveActors();
+	void RemoveUnusedActors();
 
 private:
 	bool init();

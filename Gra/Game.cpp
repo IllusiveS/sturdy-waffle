@@ -206,7 +206,7 @@ void Game::UnSubscribeRender(IRenderable *render) {
 	renders.erase(render);
 }
 
-void Game::RemoveActors() {
+void Game::RemoveUnusedActors() {
 	for(auto itr = actorsToBeRemoved.begin(); itr != actorsToBeRemoved.end(); itr++) {
 		Actor * actorToRemove = *itr;
 		actors.erase(actorToRemove);
