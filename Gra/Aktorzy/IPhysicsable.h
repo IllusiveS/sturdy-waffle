@@ -21,6 +21,7 @@ public:
 	Vector2 oldSpeed;
 	Vector2 speedVector;
 	Vector2 scale;
+	std::string type;
 
 	AABB aabb;
 	Vector2 aabbOffset;

@@ -9,7 +9,11 @@
 class Actor {
 public:
 	Actor();
+
+	void Destroy();
+
 	virtual ~Actor();
+
 };
 
 

@@ -19,11 +19,11 @@ void Enemy::Move(Vector2 vec) {
 
 
 void Enemy::Render(SDL_Renderer *renderer) {
-    tex->render((int)position.x, (int)position.y);
+    tex->render((int) position.x, (int) position.y);
 }
 
 void Enemy::Tick(float delta) {
-    Move(Vector2(speedX*delta, 0));
+    Move(Vector2(speedX * delta, 0));
 }
 
 void Enemy::ReadScript(lua_State *L) {
@@ -44,25 +44,26 @@ void Enemy::ReadScript(lua_State *L) {
         std::cout << "Error, can't open script!" << std::endl;
     }
 }
+
 void Enemy::Fire() {
-    Projectile1 * proj = new Projectile1(Vector2(position.x, position.y));
+    Projectile1 *proj = new Projectile1(Vector2(position.x - 34, position.y + 15));
 }
 
 void Enemy::Position(Vector2 vec) {
-    this->position.x = (int)vec.x;
-    this->position.y = (int)vec.y;
+    this->position.x = (int) vec.x;
+    this->position.y = (int) vec.y;
 }
 
 void Enemy::StartingPosition(Vector2 vec) {
-    this->startingPosition.x = (int)vec.x;
-    this->startingPosition.y = (int)vec.y;
+    this->startingPosition.x = (int) vec.x;
+    this->startingPosition.y = (int) vec.y;
 }
 
 void Enemy::SetSpeed(float speed) {
     this->speedX = speed;
 }
 
-float Enemy::GetSpeed () const {
+float Enemy::GetSpeed() const {
     return speedX;
 }
 
@@ -80,8 +81,14 @@ void Enemy::ExportLua(lua_State *L) {
 
 void Enemy::collide(IPhysicsable *coll) {
 
+    if (!coll->type.compare("PlayerProjectile")) {
+        std::cout << "przeciwnik kaput!";
+        Destroy();
+    }
 }
+
 
 Enemy::~Enemy() {
 
 }
+
