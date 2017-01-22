@@ -8,3 +8,7 @@
 Actor::Actor() {
 	Game::GetGame()->SubscribeActor(this);
 }
+
+void Actor::Destroy() {
+	Game::GetGame()->UnSubscribeActor(this);
+}
