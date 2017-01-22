@@ -191,10 +191,7 @@ void Game::SubscribePhysics(IPhysicsable * phi) {
 }
 
 void Game::UnSubscribeActor(Actor *actor) {
-	//TODO zrobić usuwanie po ticku, żeby nic się nie jebło
-	Actor * actorToRemove = actor;
-	actors.erase(actor);
-	delete actor;
+	actorsToBeRemoved.insert(actor);
 }
 
 void Game::UnSubscribeTick(ITickable *tick) {
@@ -207,4 +204,13 @@ void Game::UnSubscribePhysics(IPhysicsable *phi) {
 
 void Game::UnSubscribeRender(IRenderable *render) {
 	renders.erase(render);
+}
+
+void Game::RemoveUnusedActors() {
+	for(auto itr = actorsToBeRemoved.begin(); itr != actorsToBeRemoved.end(); itr++) {
+		Actor * actorToRemove = *itr;
+		actors.erase(actorToRemove);
+		delete actorToRemove;
+	}
+	actorsToBeRemoved.clear();
 }
