@@ -10,3 +10,7 @@ ITickable::ITickable() {
 	Game::GetGame()->SubscribeTick(this);
 }
 
+ITickable::~ITickable() {
+
+}
+

@@ -75,6 +75,5 @@ void Projectile::ExportLua(lua_State *L) {
 }
 
 void Projectile::collide(IPhysicsable *coll) {
-    std::cout << "przeciwnik ma kolizję" << std::endl;
 
 }

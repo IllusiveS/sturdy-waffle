@@ -96,12 +96,15 @@ void Player::ExportLua(lua_State *L) {
 }
 
 void Player::collide(IPhysicsable *coll) {
-    std::cout << "gracz ma kolizję" << std::endl;
 
     if (!coll->type.compare("Enemy") || !coll->type.compare("Projectile1")) {
         std::cout << "you died!";
 
     }
+
+}
+
+Player::~Player() {
 
 }
 

@@ -16,6 +16,7 @@
 class Player : private Actor, private ITickable, private IRenderable, private IPhysicsable {
 public:
 	Player();
+	virtual ~Player();
 	void Move(Vector2 vec);
 	void Position(Vector2 vec);
 

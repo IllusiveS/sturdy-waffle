@@ -9,6 +9,7 @@
 class ITickable {
 public:
 	ITickable();
+	virtual ~ITickable();
 
 	virtual void Tick(float delta) = 0;
 };

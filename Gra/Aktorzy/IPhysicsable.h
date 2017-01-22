@@ -13,7 +13,7 @@
 class IPhysicsable {
 public:
 	IPhysicsable();
-	~IPhysicsable();
+	virtual ~IPhysicsable();
 
 	Vector2 startingPosition;
 	Vector2 oldPosition;

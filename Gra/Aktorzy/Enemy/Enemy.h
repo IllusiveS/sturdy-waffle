@@ -15,6 +15,8 @@
 #include <Gra/Tekstury/Texture.h>
 class Enemy : private Actor, protected ITickable, protected IRenderable, protected IPhysicsable {
 public:
+	virtual ~Enemy();
+
     void Move(Vector2 vec);
     void Position(Vector2 vec);
     void StartingPosition(Vector2 vec);

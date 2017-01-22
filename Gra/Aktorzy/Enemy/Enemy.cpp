@@ -80,9 +80,15 @@ void Enemy::ExportLua(lua_State *L) {
 }
 
 void Enemy::collide(IPhysicsable *coll) {
-    std::cout << "przeciwnik ma kolizję" << std::endl;
+
     if (!coll->type.compare("PlayerProjectile")) {
         std::cout << "przeciwnik kaput!";
         Destroy();
     }
 }
+
+
+Enemy::~Enemy() {
+
+}
+
