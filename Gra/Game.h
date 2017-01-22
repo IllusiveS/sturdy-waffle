@@ -14,6 +14,7 @@
 #include <Gra/Aktorzy/IPhysicsable.h>
 #include "Gra/Tekstury/TextureManager.h"
 #include "InputManager.h"
+#include <Gra/Aktorzy/Enemy/EnemyManager.h>
 
 class CollisionManager;
 
@@ -58,6 +59,9 @@ public://Zapisywanie się aktorów
 	void UnSubscribePhysics(IPhysicsable * phi);
 	void UnSubscribeRender(IRenderable * render);
 
+	int SCREEN_WIDTH = 800;
+	int SCREEN_HEIGHT = 600;
+
 private:
 	bool init();
 	lua_State * L;
@@ -74,8 +78,10 @@ private:
 	TextureManager * textureManager;
 	InputManager * inputManager;
 	CollisionManager * collisionManager;
+	EnemyManager * enemyManager;
 	//TODO GameManager
 	void ExportLua(lua_State *L);
+
 };
 
 

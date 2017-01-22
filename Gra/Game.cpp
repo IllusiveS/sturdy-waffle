@@ -10,6 +10,8 @@
 #include <Gra/Aktorzy/Player/Player.h>
 #include <Gra/Aktorzy/TestCollider/TestCollider.h>
 #include <Gra/Aktorzy/Collisions/CollisionManager.h>
+#include <Gra/Aktorzy/Enemy/Enemy.h>
+#include <Gra/Aktorzy/Enemy/EnemyManager.h>
 #include "Game.h"
 
 Game * Game::gameSingleton = nullptr;
@@ -35,8 +37,10 @@ void Game::Prepare() {
 	textureManager = new TextureManager();
 	inputManager = new InputManager();
 	collisionManager = new CollisionManager();
+    enemyManager = new EnemyManager();
 	setupLuaState();
 	Player * player = new Player();
+    enemyManager->spawnEnemy();
 	player->ReadScript(L);
 	TestCollider * coll = new TestCollider();
 }
@@ -66,7 +70,7 @@ bool Game::init()
 	else
 	{
 		//Create window
-		mainWindow = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, 0 );
+		mainWindow = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, 0 );
 		if( mainWindow == NULL )
 		{
 			printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );

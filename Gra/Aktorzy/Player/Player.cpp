@@ -8,6 +8,7 @@
 
 Player::Player() : speed(100), IRenderable(), ITickable(), IPhysicsable() {
 	tex = Game::GetGame()->GetTextureManager()->GetTexture("player");
+    Position(Vector2(0, Game::GetGame()->SCREEN_HEIGHT/2));
 }
 
 void Player::Move(Vector2 vec) {
