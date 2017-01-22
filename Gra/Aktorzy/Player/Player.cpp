@@ -54,6 +54,7 @@ void Player::ReadScript(lua_State *L) {
 
 void Player::Fire() {
     PlayerProjectile *proj = new PlayerProjectile(Vector2(position.x, position.y / 2));
+    std::cout << "Blyat";
 }
 
 void Player::Position(Vector2 vec) {

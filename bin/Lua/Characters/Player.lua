@@ -18,6 +18,10 @@ player = {
         local InputVector = MATH.Vector2(Xmovement, YMovement)
         local NormalizedVector = InputVector:normalized()
         player:move(NormalizedVector:multiplyByScalar(deltaSpeed))
+
+        if Fire > 0 then
+            player.Fire()
+        end
     end
 }
 
