@@ -10,5 +10,5 @@ IRenderable::IRenderable() {
 }
 
 IRenderable::~IRenderable() {
-
+	Game::GetGame()->UnSubscribeRender(this);
 }

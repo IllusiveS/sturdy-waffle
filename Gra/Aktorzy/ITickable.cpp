@@ -11,6 +11,6 @@ ITickable::ITickable() {
 }
 
 ITickable::~ITickable() {
-
+	Game::GetGame()->UnSubscribeTick(this);
 }
 

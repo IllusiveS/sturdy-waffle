@@ -10,7 +10,7 @@ IPhysicsable::IPhysicsable() : aabb(Vector2(0, 0), Vector2(16, 16)){
 }
 
 IPhysicsable::~IPhysicsable() {
-
+	Game::GetGame()->UnSubscribePhysics(this);
 }
 
 void IPhysicsable::CalculatePhysics(float delta) {
