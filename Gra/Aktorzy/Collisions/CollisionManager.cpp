@@ -6,6 +6,7 @@
 #include <map>
 #include <algorithm>
 #include <future>
+#include <iostream>
 #include "CollisionManager.h"
 #include "SweepData.h"
 
@@ -19,55 +20,51 @@ void CollisionManager::unSubscribePhysicable(IPhysicsable * object) {
 
 void CollisionManager::processPhysics(float delta) {
 	std::set<SweepData> sweepData;
+//	printf("Begin sort\n");
 	for(auto itr = objects.begin(); itr != objects.end(); itr++) {
 		IPhysicsable * object = *itr;
 		object->CalculatePhysics(delta);
 		sweepData.insert(object->getBeginSweepData());
 		sweepData.insert(object->getEndSweepData());
 	}
+//	printf("End sort\n");
 
 	//TODO zamienić SweepData na IPhysicsable w tym miejscu
-	std::map<SweepData, std::list<SweepData>> intersections;
+	std::map<IPhysicsable *, std::list<IPhysicsable *>> intersections;
 
 	std::list<std::future<int>> futures = std::list<std::future<int>>();
 
+//	printf("Begin sweep\n");
 	for(auto itr = sweepData.begin(); itr != sweepData.end(); itr++) {
 		SweepData currentData = *itr;
+//		printf("current data %i\n", currentData.pos);
 		if(currentData.isBegin) {
 			for(auto dataItr = intersections.begin(); dataItr != intersections.end(); dataItr++) {
-				std::pair<SweepData, std::list<SweepData>> beginData = *dataItr;
-				beginData.second.push_back(currentData);
-				intersections.insert(beginData);
+				dataItr->second.push_back(currentData.collider);
 			}
-			intersections.insert(std::pair<SweepData, std::list<SweepData>>(currentData, std::list<SweepData>()));
+			intersections.insert(std::pair<IPhysicsable *, std::list<IPhysicsable *>>(currentData.collider, std::list<IPhysicsable *>()));
 		} else {
 			auto finalDataIterator = std::find_if(intersections.begin(), intersections.end(), [currentData]
-					(const std::pair<SweepData, std::list<SweepData>> data) {
-				return data.first.collider == currentData.collider;
+					(const std::pair<IPhysicsable *, std::list<IPhysicsable *>> data) {
+				return data.first == currentData.collider;
 			});
-			std::pair<SweepData, std::list<SweepData>> finalSet = *finalDataIterator;
+			std::pair<IPhysicsable *, std::list<IPhysicsable *>> finalSet = *finalDataIterator;
 			intersections.erase(finalDataIterator);
 			int intersectionsInFinalSetFound = finalSet.second.size();
 			if(!intersectionsInFinalSetFound == 0 ){
-				futures.push_back(std::async(std::launch::async, [finalSet](){
-					SweepData dataToCheck = finalSet.first;
-					std::list<SweepData> listToSweep = finalSet.second;
+				IPhysicsable * dataToCheck = finalSet.first;
+				std::list<IPhysicsable *> listToSweep = finalSet.second;
 
-					std::for_each(listToSweep.begin(), listToSweep.end(),[=](SweepData currentChecked){
-						if(currentChecked.collider->checkCollision(dataToCheck.collider)) {
-							currentChecked.collider->collide(dataToCheck.collider);
-							dataToCheck.collider->collide(currentChecked.collider);
-						}
-					});
-					return 0;
-				}));
+				std::for_each(listToSweep.begin(), listToSweep.end(),[=](IPhysicsable * currentChecked){
+					if(currentChecked->checkCollision(dataToCheck)) {
+						currentChecked->collide(dataToCheck);
+						dataToCheck->collide(currentChecked);
+					}
+				});
 			}
 		}
 	}
-	std::for_each(futures.begin(), futures.end(), [](std::future<int> &future) {
-		future.get();
-	});
-
+//	printf("End sweep\n");
 }
 
 void CollisionManager::calculatePhysics(std::pair<SweepData, std::list<SweepData>> pair) {
