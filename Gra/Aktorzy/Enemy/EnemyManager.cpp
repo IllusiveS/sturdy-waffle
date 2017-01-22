@@ -9,8 +9,8 @@
 #include "Charger.h"
 
 void EnemyManager::spawnEnemy() {
-    Strafer * enemyA = new Strafer(Vector2(400,200));
-    Charger * enemyB = new Charger(Vector2(400,400));
+    Strafer * enemyA = new Strafer(Vector2(800,200));
+    Charger * enemyB = new Charger(Vector2(800,400));
 
 }
 

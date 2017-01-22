@@ -61,7 +61,7 @@ void Player::Fire() {
 
     if (duration_cast<milliseconds>(
             system_clock::now().time_since_epoch()).count() - old > 400) {
-        PlayerProjectile *proj = new PlayerProjectile(Vector2(position.x, position.y));
+        PlayerProjectile *proj = new PlayerProjectile(Vector2(position.x+34, position.y +15));
 
         old = duration_cast<milliseconds>(
                 system_clock::now().time_since_epoch()).count();
@@ -97,11 +97,10 @@ void Player::ExportLua(lua_State *L) {
 
 void Player::collide(IPhysicsable *coll) {
     std::cout << "gracz ma kolizję" << std::endl;
-    Enemy* enemy = dynamic_cast<Enemy*>(coll);
-    Projectile1* projectile1 = dynamic_cast<Projectile1*>(coll);
 
-    if (enemy || projectile1) {
+    if (!coll->type.compare("Enemy") || !coll->type.compare("Projectile1")) {
         std::cout << "you died!";
+
     }
 
 }

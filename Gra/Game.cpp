@@ -42,7 +42,7 @@ void Game::Prepare() {
 	Player * player = new Player();
     enemyManager->spawnEnemy();
 	player->ReadScript(L);
-	TestCollider * coll = new TestCollider();
+//	TestCollider * coll = new TestCollider();
 }
 
 Game::~Game() {

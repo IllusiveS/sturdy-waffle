@@ -12,9 +12,10 @@
 class PlayerProjectile : Projectile {
 public:
     PlayerProjectile(Vector2 position) : Projectile(position) {
-        speedX = 200;
+        speedX = 300;
         speedY = 0;
         tex = Game::GetGame()->GetTextureManager()->GetTexture("playerProjectile");
+        type="PlayerProjectile";
     }
 
     void Tick(float delta) override;

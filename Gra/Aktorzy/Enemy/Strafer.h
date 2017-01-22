@@ -15,6 +15,7 @@ public:
         speedX = -50;
         speedY = 200;
         tex = Game::GetGame()->GetTextureManager()->GetTexture("strafer");
+        type = "Enemy";
 
     }
 

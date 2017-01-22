@@ -15,6 +15,7 @@ public:
         speedX = -150;
         speedY = 0;
         tex = Game::GetGame()->GetTextureManager()->GetTexture("projectile1");
+        type = "Projectile1";
     }
 
     void Tick(float delta) override;

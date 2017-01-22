@@ -15,6 +15,7 @@ public:
         speedX = -75;
         speedY = 0;
         tex = Game::GetGame()->GetTextureManager()->GetTexture("charger");
+        type = "Enemy";
 
     }
 
