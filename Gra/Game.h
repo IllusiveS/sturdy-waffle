@@ -58,6 +58,8 @@ public://Zapisywanie się aktorów
 	void UnSubscribePhysics(IPhysicsable * phi);
 	void UnSubscribeRender(IRenderable * render);
 
+	void RemoveActors();
+
 private:
 	bool init();
 	lua_State * L;
@@ -65,8 +67,8 @@ private:
 
 	std::set<ITickable *> ticks;
 	std::set<IRenderable *> renders;
-	std::set<IPhysicsable *> physics;
 	std::set<Actor *> actors;
+	std::set<Actor *> actorsToBeRemoved;
 
 	SDL_Window * mainWindow;
 	SDL_Surface * mainSurface;
