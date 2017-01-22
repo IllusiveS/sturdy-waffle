@@ -10,6 +10,8 @@ textures = {
     grass = "Textures/Grass.png",
     wall = "Textures/Wall.png",
     player = "Textures/Player.png",
-    enemy = "Textures/Enemy.png",
-    projectile1 = "Textures/Projectile1.png"
+    charger = "Textures/Charger.png",
+    strafer = "Textures/Strafer.png",
+    projectile1 = "Textures/Projectile1.png",
+    playerProjectile = "Textures/PlayerProjectile.png"
 }

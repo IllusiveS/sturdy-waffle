@@ -6,6 +6,7 @@
 #define SDLPODSTAWA_EXE_ENEMYB_H
 
 
+#include <Gra/Game.h>
 #include "Enemy.h"
 
 class Charger : Enemy {
@@ -13,6 +14,8 @@ public:
     Charger(Vector2 position) : Enemy(position) {
         speedX = -75;
         speedY = 0;
+        tex = Game::GetGame()->GetTextureManager()->GetTexture("charger");
+
     }
 
     void Tick(float delta) override;

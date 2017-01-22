@@ -8,7 +8,6 @@
 #include "Enemy.h"
 
 Enemy::Enemy(Vector2 position) : IRenderable(), ITickable(), IPhysicsable() {
-    tex = Game::GetGame()->GetTextureManager()->GetTexture("enemy");
     StartingPosition(position);
     Position(position);
 }

@@ -11,6 +11,7 @@ player = {
     tick = function(player, delta)
         local InputX = Game:getGame():getInputManager():checkInput("right")
         local InputY = Game:getGame():getInputManager():checkInput("up")
+        local Fire = Game:getGame():getInputManager():checkInput("fire")
         local Xmovement = delta * InputX
         local YMovement = delta * InputY
         local deltaSpeed = delta * player.speed

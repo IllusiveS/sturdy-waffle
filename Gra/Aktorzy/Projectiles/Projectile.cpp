@@ -6,7 +6,7 @@
 #include "Projectile.h"
 
 Projectile::Projectile(Vector2 position) : IRenderable(), ITickable(), IPhysicsable() {
-    tex = Game::GetGame()->GetTextureManager()->GetTexture("projectile");
+
     StartingPosition(position);
     Position(position);
 }

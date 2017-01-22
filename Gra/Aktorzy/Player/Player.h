@@ -28,6 +28,7 @@ public:
 private:
 	Texture * tex;
 	float speed;
+	void Fire();
 private:
 	void Render(SDL_Renderer *renderer) override;
 
@@ -35,6 +36,7 @@ private:
 
 	void Tick(float delta) override;
 	std::shared_ptr<luabridge::LuaRef> tickFunc;
+
 };
 
 
