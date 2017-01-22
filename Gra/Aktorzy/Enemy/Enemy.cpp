@@ -22,14 +22,7 @@ void Enemy::Render(SDL_Renderer *renderer) {
 }
 
 void Enemy::Tick(float delta) {
-    if (tickFunc) {
-        try{
-            (*tickFunc)(this, delta);
-        }
-        catch (luabridge::LuaException const& e) {
-            std::cout << "LuaException: " << e.what() << std::endl;
-        }
-    }
+    Move(Vector2(1, 0));
 }
 
 void Enemy::ReadScript(lua_State *L) {

@@ -11,10 +11,9 @@
 
 class EnemyManager {
 public:
-    EnemyManager();
 
     void spawnEnemy();
-    static std::set<Enemy *> enemies;
+    std::set<Enemy *> enemies;
 };
 
 

@@ -6,8 +6,6 @@
 #include "EnemyManager.h"
 #include "Enemy.h"
 
-EnemyManager::EnemyManager();
-
 void EnemyManager::spawnEnemy() {
     Enemy * enemy = new Enemy(Vector2(600,200));
     enemies.insert(enemy);
