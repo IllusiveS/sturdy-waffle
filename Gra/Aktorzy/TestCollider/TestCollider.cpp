@@ -10,7 +10,6 @@
 #include <Gra/Aktorzy/IRenderable.h>
 
 void TestCollider::collide(IPhysicsable *coll) {
-	std::cout << "test collider hit" << std::endl;
 }
 
 TestCollider::TestCollider() : IPhysicsable() {

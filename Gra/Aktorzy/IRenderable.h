@@ -11,7 +11,7 @@
 class IRenderable {
 public:
 	IRenderable();
-
+	virtual ~IRenderable();
 	virtual void Render(SDL_Renderer * renderer) = 0;
 };
 

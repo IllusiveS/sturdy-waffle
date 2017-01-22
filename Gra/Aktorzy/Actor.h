@@ -9,6 +9,7 @@
 class Actor {
 public:
 	Actor();
+	virtual ~Actor();
 };
 
 

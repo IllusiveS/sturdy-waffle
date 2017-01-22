@@ -96,13 +96,16 @@ void Player::ExportLua(lua_State *L) {
 }
 
 void Player::collide(IPhysicsable *coll) {
-    std::cout << "gracz ma kolizję" << std::endl;
     Enemy* enemy = dynamic_cast<Enemy*>(coll);
     Projectile1* projectile1 = dynamic_cast<Projectile1*>(coll);
 
     if (enemy || projectile1) {
         std::cout << "you died!";
     }
+
+}
+
+Player::~Player() {
 
 }
 
