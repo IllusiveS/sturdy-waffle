@@ -13,7 +13,6 @@
 #include <Gra/Aktorzy/IPhysicsable.h>
 #include <Gra/Tekstury/Texture.h>
 #include <memory>
-
 class Player : private Actor, private ITickable, private IRenderable, private IPhysicsable {
 public:
 	Player();
@@ -26,6 +25,7 @@ public:
 	void ReadScript(lua_State * L);
 	static void ExportLua(lua_State *L);
 private:
+	long old;
 	Texture * tex;
 	float speed;
 	void Fire();

@@ -45,7 +45,7 @@ void Enemy::ReadScript(lua_State *L) {
     }
 }
 void Enemy::Fire() {
-    Projectile1 * proj = new Projectile1(Vector2(position.x, position.y/2));
+    Projectile1 * proj = new Projectile1(Vector2(position.x, position.y));
 }
 
 void Enemy::Position(Vector2 vec) {

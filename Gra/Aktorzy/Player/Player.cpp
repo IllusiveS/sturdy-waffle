@@ -5,7 +5,10 @@
 #include <iostream>
 #include <Gra/Game.h>
 #include <Gra/Aktorzy/Projectiles/PlayerProjectile.h>
+#include <chrono>
 #include "Player.h"
+
+using namespace std::chrono;
 
 Player::Player() : speed(250), IRenderable(), ITickable(), IPhysicsable() {
     tex = Game::GetGame()->GetTextureManager()->GetTexture("player");
@@ -53,8 +56,15 @@ void Player::ReadScript(lua_State *L) {
 }
 
 void Player::Fire() {
-    PlayerProjectile *proj = new PlayerProjectile(Vector2(position.x, position.y / 2));
-    std::cout << "Blyat";
+
+    if (duration_cast<milliseconds>(
+            system_clock::now().time_since_epoch()).count() - old > 400) {
+        PlayerProjectile *proj = new PlayerProjectile(Vector2(position.x, position.y));
+
+        old = duration_cast<milliseconds>(
+                system_clock::now().time_since_epoch()).count();
+    }
+
 }
 
 void Player::Position(Vector2 vec) {
