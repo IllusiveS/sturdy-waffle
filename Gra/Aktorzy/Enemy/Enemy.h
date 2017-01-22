@@ -13,20 +13,22 @@
 #include <Gra/Aktorzy/IRenderable.h>
 #include <Gra/Aktorzy/IPhysicsable.h>
 #include <Gra/Tekstury/Texture.h>
-class Enemy : private Actor, private ITickable, private IRenderable, private IPhysicsable {
+class Enemy : private Actor, protected ITickable, protected IRenderable, protected IPhysicsable {
 public:
-    Enemy(Vector2 position);
     void Move(Vector2 vec);
     void Position(Vector2 vec);
+    void StartingPosition(Vector2 vec);
 
     void SetSpeed(float speed);
     float GetSpeed () const;
 
     void ReadScript(lua_State * L);
     static void ExportLua(lua_State *L);
-private:
+protected:
     Texture * tex;
-    float speed;
+    float speedX;
+    float speedY;
+    Enemy(Vector2 position);
 private:
     void Render(SDL_Renderer *renderer) override;
 

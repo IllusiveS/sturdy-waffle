@@ -6,8 +6,9 @@
 #include <Gra/Aktorzy/IPhysicsable.h>
 #include "Enemy.h"
 
-Enemy::Enemy(Vector2 position) : speed(100), IRenderable(), ITickable(), IPhysicsable() {
+Enemy::Enemy(Vector2 position) : IRenderable(), ITickable(), IPhysicsable() {
     tex = Game::GetGame()->GetTextureManager()->GetTexture("enemy");
+    StartingPosition(position);
     Position(position);
 }
 
@@ -22,7 +23,7 @@ void Enemy::Render(SDL_Renderer *renderer) {
 }
 
 void Enemy::Tick(float delta) {
-    Move(Vector2(1, 0));
+    Move(Vector2(speedX*delta, 0));
 }
 
 void Enemy::ReadScript(lua_State *L) {
@@ -31,7 +32,7 @@ void Enemy::ReadScript(lua_State *L) {
         LuaRef table = getGlobal(L, "player");
         if (table.isTable()) {
             if (table["speedVector"].isNumber()) {
-                speed = table["speedVector"];
+                speedX = table["speedVector"];
             }
             if (table["tick"].isFunction()) {
                 tickFunc = std::make_shared<LuaRef>(table["tick"]);
@@ -49,12 +50,17 @@ void Enemy::Position(Vector2 vec) {
     this->position.y = (int)vec.y;
 }
 
+void Enemy::StartingPosition(Vector2 vec) {
+    this->startingPosition.x = (int)vec.x;
+    this->startingPosition.y = (int)vec.y;
+}
+
 void Enemy::SetSpeed(float speed) {
-    this->speed = speed;
+    this->speedX = speed;
 }
 
 float Enemy::GetSpeed () const {
-    return speed;
+    return speedX;
 }
 
 void Enemy::ExportLua(lua_State *L) {

@@ -15,6 +15,7 @@ public:
 	IPhysicsable();
 	~IPhysicsable();
 
+	Vector2 startingPosition;
 	Vector2 oldPosition;
 	Vector2 position;
 	Vector2 oldSpeed;

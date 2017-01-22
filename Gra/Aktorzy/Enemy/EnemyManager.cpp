@@ -5,9 +5,12 @@
 #include <Gra/Matma/Vector2.h>
 #include "EnemyManager.h"
 #include "Enemy.h"
+#include "Strafer.h"
+#include "Charger.h"
 
 void EnemyManager::spawnEnemy() {
-    Enemy * enemy = new Enemy(Vector2(600,200));
-    enemies.insert(enemy);
+    EnemyA * enemyA = new EnemyA(Vector2(400,200));
+    EnemyB * enemyB = new EnemyB(Vector2(400,400));
+
 }
 
