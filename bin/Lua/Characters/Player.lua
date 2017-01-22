@@ -20,7 +20,7 @@ player = {
         player:move(NormalizedVector:multiplyByScalar(deltaSpeed))
 
         if Fire > 0 then
-            player.Fire()
+            player:fire()
         end
     end
 }
