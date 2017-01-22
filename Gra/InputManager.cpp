@@ -41,23 +41,20 @@ void InputManager::UpdateInputs() {
 		addInputValue("up", 1);
 	}
 
-	while (SDL_PollEvent(&e) != 0) {
-		//User requests quit
-		if (e.type == SDL_QUIT) {
-			//Wychodzimy
-		}
-			//User presses a key
-		else if (e.type == SDL_KEYDOWN) {
-			switch (e.key.keysym.sym) {
-				case SDLK_SPACE:
-					setInputValue("fire", 1);
-					break;
-
-				default:
-					break;
-			}
-		}
+	if (state[SDL_SCANCODE_SPACE]) {
+		setInputValue("fire", 1);
 	}
+
+//	while (SDL_PollEvent(&e) != 0) {
+//		//User requests quit
+//		if (e.type == SDL_QUIT) {
+//			//Wychodzimy
+//		}
+//			//User presses a key
+//		else if (e.type == SDL_KEYDOWN) {
+//
+//		}
+//	}
 }
 
 InputManager::InputManager() {
