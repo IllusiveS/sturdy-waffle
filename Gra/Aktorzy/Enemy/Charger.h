@@ -8,9 +8,9 @@
 
 #include "Enemy.h"
 
-class EnemyB : Enemy {
+class Charger : Enemy {
 public:
-    EnemyB(Vector2 position) : Enemy(position) {
+    Charger(Vector2 position) : Enemy(position) {
         speedX = -75;
         speedY = 0;
     }

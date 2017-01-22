@@ -3,33 +3,31 @@
 //
 
 #include <Gra/Game.h>
-#include <Gra/Aktorzy/IPhysicsable.h>
-#include <Gra/Aktorzy/Projectiles/Projectile1.h>
-#include "Enemy.h"
+#include "Projectile.h"
 
-Enemy::Enemy(Vector2 position) : IRenderable(), ITickable(), IPhysicsable() {
-    tex = Game::GetGame()->GetTextureManager()->GetTexture("enemy");
+Projectile::Projectile(Vector2 position) : IRenderable(), ITickable(), IPhysicsable() {
+    tex = Game::GetGame()->GetTextureManager()->GetTexture("projectile");
     StartingPosition(position);
     Position(position);
 }
 
-void Enemy::Move(Vector2 vec) {
+void Projectile::Move(Vector2 vec) {
     speedVector.x = vec.x;
     speedVector.y = vec.y;
 }
 
 
-void Enemy::Render(SDL_Renderer *renderer) {
+void Projectile::Render(SDL_Renderer *renderer) {
     tex->render((int)position.x, (int)position.y);
 }
 
-void Enemy::Tick(float delta) {
+void Projectile::Tick(float delta) {
     Move(Vector2(speedX*delta, 0));
 }
 
-void Enemy::ReadScript(lua_State *L) {
+void Projectile::ReadScript(lua_State *L) {
     using namespace luabridge;
-    if (luaL_dofile(L, "Lua/Characters/Enemy.lua") == 0) { // script has opened
+    if (luaL_dofile(L, "Lua/Characters/Projectile.lua") == 0) { // script has opened
         LuaRef table = getGlobal(L, "player");
         if (table.isTable()) {
             if (table["speedVector"].isNumber()) {
@@ -45,41 +43,38 @@ void Enemy::ReadScript(lua_State *L) {
         std::cout << "Error, can't open script!" << std::endl;
     }
 }
-void Enemy::Fire() {
-    Projectile1 * proj = new Projectile1(Vector2(position.x, position.y/2));
-}
 
-void Enemy::Position(Vector2 vec) {
+void Projectile::Position(Vector2 vec) {
     this->position.x = (int)vec.x;
     this->position.y = (int)vec.y;
 }
 
-void Enemy::StartingPosition(Vector2 vec) {
+void Projectile::StartingPosition(Vector2 vec) {
     this->startingPosition.x = (int)vec.x;
     this->startingPosition.y = (int)vec.y;
 }
 
-void Enemy::SetSpeed(float speed) {
+void Projectile::SetSpeed(float speed) {
     this->speedX = speed;
 }
 
-float Enemy::GetSpeed () const {
+float Projectile::GetSpeed () const {
     return speedX;
 }
 
-void Enemy::ExportLua(lua_State *L) {
+void Projectile::ExportLua(lua_State *L) {
     using namespace luabridge;
     getGlobalNamespace(L)
-            .beginNamespace("Enemy")
-            .beginClass<Enemy>("Enemy")
-            .addFunction("move", &Enemy::Move)
-            .addFunction("position", &Enemy::Position)
-            .addProperty("speed", &Enemy::GetSpeed, &Enemy::SetSpeed)
+            .beginNamespace("Projectile")
+            .beginClass<Projectile>("Projectile")
+            .addFunction("move", &Projectile::Move)
+            .addFunction("position", &Projectile::Position)
+            .addProperty("speed", &Projectile::GetSpeed, &Projectile::SetSpeed)
             .endClass()
             .endNamespace();
 }
 
-void Enemy::collide(IPhysicsable *coll) {
+void Projectile::collide(IPhysicsable *coll) {
     std::cout << "przeciwnik ma kolizję" << std::endl;
 
 }

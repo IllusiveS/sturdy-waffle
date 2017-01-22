@@ -2,8 +2,8 @@
 // Created by zengel on 1/22/17.
 //
 
-#ifndef SDLPODSTAWA_EXE_ENEMY_H
-#define SDLPODSTAWA_EXE_ENEMY_H
+#ifndef SDLPODSTAWA_EXE_PROJECTILE_H
+#define SDLPODSTAWA_EXE_PROJECTILE_H
 
 
 #include <memory>
@@ -13,7 +13,7 @@
 #include <Gra/Aktorzy/IRenderable.h>
 #include <Gra/Aktorzy/IPhysicsable.h>
 #include <Gra/Tekstury/Texture.h>
-class Enemy : private Actor, protected ITickable, protected IRenderable, protected IPhysicsable {
+class Projectile : private Actor, protected ITickable, protected IRenderable, protected IPhysicsable {
 public:
     void Move(Vector2 vec);
     void Position(Vector2 vec);
@@ -28,8 +28,7 @@ protected:
     Texture * tex;
     float speedX;
     float speedY;
-    Enemy(Vector2 position);
-    void Fire();
+    Projectile(Vector2 position);
 private:
     void Render(SDL_Renderer *renderer) override;
 
@@ -37,8 +36,7 @@ private:
 
     void Tick(float delta) override;
     std::shared_ptr<luabridge::LuaRef> tickFunc;
-
 };
 
 
-#endif //SDLPODSTAWA_EXE_ENEMY_H
+#endif //SDLPODSTAWA_EXE_PROJECTILE_H

@@ -10,5 +10,6 @@ textures = {
     grass = "Textures/Grass.png",
     wall = "Textures/Wall.png",
     player = "Textures/Player.png",
-    enemy = "Textures/Enemy.png"
+    enemy = "Textures/Enemy.png",
+    projectile1 = "Textures/Projectile1.png"
 }
