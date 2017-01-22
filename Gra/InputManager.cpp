@@ -1,12 +1,11 @@
 //
 // Created by wysockipatryk on 12/26/16.
 //
-
+#include <iostream>
 #include <SDL_keycode.h>
 #include <SDL_events.h>
 #include <lua.hpp>
 #include <LuaBridge/LuaBridge.h>
-#include <iostream>
 #include "InputManager.h"
 
 float InputManager::IsButtonPressed(std::string key) {
@@ -23,6 +22,7 @@ void InputManager::UpdateInputs() {
 	SDL_PumpEvents();
 	setInputValue("up", 0);
 	setInputValue("right", 0);
+	setInputValue("fire", 0);
 
 	const Uint8 *state = SDL_GetKeyboardState(NULL);
 	if (state[SDLK_RETURN]) {
@@ -41,36 +41,23 @@ void InputManager::UpdateInputs() {
 		addInputValue("up", 1);
 	}
 
-//	while (SDL_PollEvent(&e) != 0) {
-//		//User requests quit
-//		if (e.type == SDL_QUIT) {
-//			//Wychodzimy
-//		}
-//			//User presses a key
-//		else if (e.type == SDL_KEYDOWN) {
-//			//Select surfaces based on key press
-//			switch (e.key.keysym.sym) {
-//				case SDLK_UP:
-//					addInputValue("up", -1);
-//					break;
-//
-//				case SDLK_DOWN:
-//					addInputValue("up", 1);
-//					break;
-//
-//				case SDLK_LEFT:
-//					addInputValue("right", -1);
-//					break;
-//
-//				case SDLK_RIGHT:
-//					addInputValue("right", 1);
-//					break;
-//
-//				default:
-//					break;
-//			}
-//		}
-//	}
+	while (SDL_PollEvent(&e) != 0) {
+		//User requests quit
+		if (e.type == SDL_QUIT) {
+			//Wychodzimy
+		}
+			//User presses a key
+		else if (e.type == SDL_KEYDOWN) {
+			switch (e.key.keysym.sym) {
+				case SDLK_SPACE:
+					setInputValue("fire", 1);
+					break;
+
+				default:
+					break;
+			}
+		}
+	}
 }
 
 InputManager::InputManager() {
