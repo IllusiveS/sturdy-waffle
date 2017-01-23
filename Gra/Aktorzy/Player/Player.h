@@ -13,10 +13,10 @@
 #include <Gra/Aktorzy/IPhysicsable.h>
 #include <Gra/Tekstury/Texture.h>
 #include <memory>
-
 class Player : private Actor, private ITickable, private IRenderable, private IPhysicsable {
 public:
 	Player();
+	virtual ~Player();
 	void Move(Vector2 vec);
 	void Position(Vector2 vec);
 
@@ -26,8 +26,10 @@ public:
 	void ReadScript(lua_State * L);
 	static void ExportLua(lua_State *L);
 private:
+	long old;
 	Texture * tex;
 	float speed;
+	void Fire();
 private:
 	void Render(SDL_Renderer *renderer) override;
 
@@ -35,6 +37,7 @@ private:
 
 	void Tick(float delta) override;
 	std::shared_ptr<luabridge::LuaRef> tickFunc;
+
 };
 
 

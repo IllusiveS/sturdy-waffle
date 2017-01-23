@@ -40,7 +40,6 @@ void InputManager::UpdateInputs() {
 	if (state[SDL_SCANCODE_DOWN]) {
 		addInputValue("up", 1);
 	}
-
 	if (state[SDL_SCANCODE_SPACE]) {
 		setInputValue("fire", 1);
 	}
@@ -60,6 +59,7 @@ void InputManager::UpdateInputs() {
 InputManager::InputManager() {
 	inputs.insert(std::pair<std::string, float>("up", 0));
 	inputs.insert(std::pair<std::string, float>("right", 0));
+	inputs.insert(std::pair<std::string, float>("fire", 0));
 }
 
 void InputManager::setInputValue(std::string key, float value) {
