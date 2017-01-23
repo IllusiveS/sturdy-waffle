@@ -32,10 +32,13 @@ public:
     bool wave5 = false;
     bool wave6 = false;
     bool wave7 = false;
+    bool finalWave = false;
 
     void Tick(float delta) override;
 
     void spawnWave6();
+
+    void spawnFinalWave();
 };
 
 

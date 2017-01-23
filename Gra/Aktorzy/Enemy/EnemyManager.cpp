@@ -10,6 +10,7 @@
 #include "Charger.h"
 #include "Shooter.h"
 #include "Asteroid.h"
+#include "Boss.h"
 
 
 void EnemyManager::spawnWaves() {
@@ -21,35 +22,41 @@ void EnemyManager::Tick(float delta) {
     long now = duration_cast<milliseconds>(
             system_clock::now().time_since_epoch()).count();
 
-    if (now - startTime > 1000 && !wave1) {
+    if (now - startTime > 3000 && !wave1) {
         spawnWave1();
         wave1 = true;
     }
 
-    if (now - startTime > 7000 && !wave2) {
+    if (now - startTime > 9000 && !wave2) {
         spawnWave2();
         wave2 = true;
     }
 
-    if (now - startTime > 15000 && !wave3) {
+    if (now - startTime > 17000 && !wave3) {
         spawnWave3();
         wave3 = true;
     }
 
-    if (now - startTime > 20000 && !wave4) {
+    if (now - startTime > 22000 && !wave4) {
         spawnWave4();
         wave4 = true;
     }
 
-    if (now - startTime > 25000 && !wave5) {
+    if (now - startTime > 27000 && !wave5) {
         spawnWave5();
         wave5 = true;
     }
 
-    if (now - startTime > 35000 && !wave6) {
+    if (now - startTime > 37000 && !wave6) {
         spawnWave6();
         wave6 = true;
     }
+
+    if (now - startTime > 47000 && !finalWave) {
+        spawnFinalWave();
+        finalWave = true;
+    }
+
 
 }
 
@@ -150,5 +157,8 @@ void EnemyManager::spawnWave6() {
     Asteroid *asteroidC = new Asteroid(Vector2(1600, 500));
 }
 
+void EnemyManager::spawnFinalWave() {
+    Boss * boss = new Boss(Vector2(1000,300));
+}
 
 
