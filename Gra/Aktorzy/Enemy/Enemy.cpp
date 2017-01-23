@@ -85,6 +85,10 @@ void Enemy::collide(IPhysicsable *coll) {
         std::cout << "przeciwnik kaput!";
         Destroy();
     }
+    if(coll->type == "EnemyKillingBox") {
+        std::cout << "X|";
+        Destroy();
+    }
 }
 
 
