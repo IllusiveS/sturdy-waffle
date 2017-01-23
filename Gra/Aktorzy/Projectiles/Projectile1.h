@@ -9,7 +9,7 @@
 #include "Projectile1.h"
 #include "Projectile.h"
 
-class Projectile1 : Projectile {
+class Projectile1 : public Projectile {
 public:
     Projectile1(Vector2 position) : Projectile(position) {
         speedX = -150;

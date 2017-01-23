@@ -13,7 +13,7 @@
 #include <Gra/Aktorzy/IPhysicsable.h>
 #include <Gra/Tekstury/Texture.h>
 #include <memory>
-class Player : private Actor, private ITickable, private IRenderable, public IPhysicsable {
+class Player : public Actor, private ITickable, private IRenderable, public IPhysicsable {
 public:
 	Player();
 	virtual ~Player();

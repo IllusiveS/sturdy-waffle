@@ -97,7 +97,13 @@ void Player::ExportLua(lua_State *L) {
 
 void Player::collide(IPhysicsable *coll) {
 
-    if (!coll->type.compare("Enemy") || !coll->type.compare("Projectile1")) {
+    if (!coll->type.compare("Enemy")) {
+        Destroy();
+
+    }
+
+    if (!coll->type.compare("Projectile1")) {
+        ((Projectile1*) coll)->Destroy();
         Destroy();
     }
 

@@ -5,6 +5,7 @@
 #include <Gra/Game.h>
 #include <Gra/Aktorzy/IPhysicsable.h>
 #include <Gra/Aktorzy/Projectiles/Projectile1.h>
+#include <Gra/Aktorzy/Projectiles/PlayerProjectile.h>
 #include "Enemy.h"
 
 Enemy::Enemy(Vector2 position) : IRenderable(), ITickable(), IPhysicsable() {
@@ -84,6 +85,7 @@ void Enemy::collide(IPhysicsable *coll) {
     if (!coll->type.compare("PlayerProjectile")) {
         std::cout << "przeciwnik kaput!";
         Destroy();
+        ((PlayerProjectile*) coll)->Destroy();
     }
 }
 
