@@ -74,9 +74,9 @@ void Player::ReadScript(lua_State *L) {
 
 void Player::Fire() {
 
-    if (duration_cast<milliseconds>(
-            system_clock::now().time_since_epoch()).count() - old > 250) {
-        PlayerProjectile *proj = new PlayerProjectile(Vector2(position.x, position.y));
+    if (duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count() - old > 400) {
+        PlayerProjectile *proj = new PlayerProjectile(Vector2(position.x+34, position.y));
+
 
         old = duration_cast<milliseconds>(
                 system_clock::now().time_since_epoch()).count();
