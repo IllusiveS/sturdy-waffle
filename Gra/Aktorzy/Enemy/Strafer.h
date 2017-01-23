@@ -11,14 +11,19 @@
 
 class Strafer : Enemy {
 public:
-    Strafer(Vector2 position) : Enemy(position) {
-        speedX = -50;
-        speedY = 200;
+    Strafer(Vector2 position, bool inverted) : Enemy(position) {
+        speedX = -125;
+        if (inverted) {
+            speedY = -200;
+        }
+        else {
+            speedY = 200;
+        }
         tex = Game::GetGame()->GetTextureManager()->GetTexture("strafer");
         type = "Enemy";
 
     }
-
+    bool inv;
     void Tick(float delta) override;
 };
 

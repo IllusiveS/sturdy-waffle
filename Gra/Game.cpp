@@ -40,7 +40,6 @@ void Game::Prepare() {
     enemyManager = new EnemyManager();
 	setupLuaState();
 	player = new Player();
-    enemyManager->spawnEnemy();
 	player->ReadScript(L);
 //	TestCollider * coll = new TestCollider();
 }

@@ -12,7 +12,7 @@
 class PlayerProjectile : public Projectile {
 public:
     PlayerProjectile(Vector2 position) : Projectile(position) {
-        speedX = 300;
+        speedX = 350;
         speedY = 0;
         tex = Game::GetGame()->GetTextureManager()->GetTexture("playerProjectile");
         type="PlayerProjectile";

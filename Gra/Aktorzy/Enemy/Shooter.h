@@ -24,6 +24,9 @@ private:
     bool moving = false;
     float destinationY;
     long old;
+    int hp = 3;
+
+    void collide(IPhysicsable *coll) override;
 };
 
 

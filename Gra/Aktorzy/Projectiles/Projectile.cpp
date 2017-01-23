@@ -9,6 +9,7 @@ Projectile::Projectile(Vector2 position) : IRenderable(), ITickable(), IPhysicsa
 
     StartingPosition(position);
     Position(position);
+    aabb = AABB(Vector2(0, 0), Vector2(4, 4));
 }
 
 void Projectile::Move(Vector2 vec) {

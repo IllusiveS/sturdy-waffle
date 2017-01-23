@@ -5,8 +5,25 @@
 #include "Shooter.h"
 #include <Gra/Game.h>
 #include <chrono>
+#include <Gra/Aktorzy/Projectiles/PlayerProjectile.h>
 
 using namespace std::chrono;
+
+void Shooter::collide(IPhysicsable *coll) {
+    if (!coll->type.compare("PlayerProjectile")) {
+        ((PlayerProjectile *) coll)->Destroy();
+        hp--;
+        if(hp==2) {
+            tex = Game::GetGame()->GetTextureManager()->GetTexture("shooter_damaged1");
+
+        } else if (hp==1) {
+            tex = Game::GetGame()->GetTextureManager()->GetTexture("shooter_damaged2");
+
+        } else {
+            Destroy();
+        }
+    }
+}
 
 void Shooter::Tick(float delta) {
 
@@ -23,7 +40,7 @@ void Shooter::Tick(float delta) {
 
         if (abs(destinationY - position.y) < 40) {
             if (duration_cast<milliseconds>(
-                    system_clock::now().time_since_epoch()).count() - old > 400) {
+                    system_clock::now().time_since_epoch()).count() - old > 600) {
                 Fire();
                 moving = false;
                 old = duration_cast<milliseconds>(
@@ -31,16 +48,7 @@ void Shooter::Tick(float delta) {
             }
         }
     }
-
-
-
-std::cout << position.y <<
-std::endl;
-std::cout << destinationY <<
-std::endl;
-
-
-Move (Vector2(speedX *delta, speedY *delta));
+    Move(Vector2(speedX * delta, speedY * delta));
 
 
 }

@@ -6,6 +6,5 @@
 #include "Charger.h"
 
 void Charger::Tick(float delta) {
-    speedX-= 2;
     Move(Vector2(speedX * delta, speedY*delta));
 }

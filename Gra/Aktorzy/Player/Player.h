@@ -30,6 +30,7 @@ private:
 	Texture * tex;
 	float speed;
 	void Fire();
+	int hp = 2;
 private:
 	void Render(SDL_Renderer *renderer) override;
 

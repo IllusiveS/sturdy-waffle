@@ -6,6 +6,7 @@
 #include "Strafer.h"
 
 void Strafer::Tick(float delta) {
+
     if (position.y >= startingPosition.y + 75) {
         speedY = -300;
     }
