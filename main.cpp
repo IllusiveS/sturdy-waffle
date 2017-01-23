@@ -23,8 +23,8 @@ int main(int argc, char *args[]) {
     }
     Game::Setup();
     Game *gra = Game::GetGame();
-    GameMap *mapa = new GameMap();
-    mapa->ReadMapFromFile("Lua/Map.lua");
+    //GameMap *mapa = new GameMap();
+   // mapa->ReadMapFromFile("Lua/Map.lua");
 
     for (; !gra->isFinished;) {
         frame++;
