@@ -116,6 +116,7 @@ void Game::UpdatePhysics(float delta) {
 
 void Game::Render() {
 	SDL_RenderClear(mainRenderer);
+	renders(std::begin(renders), std::end(renders));
 	for(auto itr = renders.begin(); itr != renders.end(); itr++) {
 		IRenderable * renderable = *itr;
 		renderable->Render(mainRenderer);

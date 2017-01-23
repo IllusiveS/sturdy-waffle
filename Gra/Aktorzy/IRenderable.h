@@ -10,6 +10,7 @@
 
 class IRenderable {
 public:
+	int layer;
 	IRenderable();
 	virtual ~IRenderable();
 	virtual void Render(SDL_Renderer * renderer) = 0;
