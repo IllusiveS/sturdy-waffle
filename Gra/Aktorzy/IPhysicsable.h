@@ -13,13 +13,15 @@
 class IPhysicsable {
 public:
 	IPhysicsable();
-	~IPhysicsable();
+	virtual ~IPhysicsable();
 
+	Vector2 startingPosition;
 	Vector2 oldPosition;
 	Vector2 position;
 	Vector2 oldSpeed;
 	Vector2 speedVector;
 	Vector2 scale;
+	std::string type;
 
 	AABB aabb;
 	Vector2 aabbOffset;

@@ -11,12 +11,17 @@ player = {
     tick = function(player, delta)
         local InputX = Game:getGame():getInputManager():checkInput("right")
         local InputY = Game:getGame():getInputManager():checkInput("up")
+        local Fire = Game:getGame():getInputManager():checkInput("fire")
         local Xmovement = delta * InputX
         local YMovement = delta * InputY
         local deltaSpeed = delta * player.speed
         local InputVector = MATH.Vector2(Xmovement, YMovement)
         local NormalizedVector = InputVector:normalized()
         player:move(NormalizedVector:multiplyByScalar(deltaSpeed))
+
+        if Fire > 0 then
+            player:fire()
+        end
     end
 }
 
