@@ -39,7 +39,7 @@ void Game::Prepare() {
 	collisionManager = new CollisionManager();
     enemyManager = new EnemyManager();
 	setupLuaState();
-	Player * player = new Player();
+	player = new Player();
     enemyManager->spawnEnemy();
 	player->ReadScript(L);
 //	TestCollider * coll = new TestCollider();
@@ -217,4 +217,8 @@ void Game::RemoveUnusedActors() {
 		delete actorToRemove;
 	}
 	actorsToBeRemoved.clear();
+}
+
+Player* Game::GetPlayer() {
+    return player;
 }

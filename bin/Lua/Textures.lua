@@ -12,6 +12,7 @@ textures = {
     player = "Textures/Player.png",
     charger = "Textures/Charger.png",
     strafer = "Textures/Strafer.png",
+    shooter = "Textures/Shooter.png",
     projectile1 = "Textures/Projectile1.png",
     playerProjectile = "Textures/PlayerProjectile.png"
 }
