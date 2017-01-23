@@ -42,11 +42,10 @@ void Game::Prepare() {
 	collisionManager = new CollisionManager();
     enemyManager = new EnemyManager();
 	setupLuaState();
-    background * bg = new background();
-	Player * player = new Player();
 
+	player = new Player();
+    background * bg = new background();
 	EnemyKillingBox * enemyKillingBox = new EnemyKillingBox();
-    enemyManager->spawnEnemy();
 	player->ReadScript(L);
 //	TestCollider * coll = new TestCollider();
 }
@@ -223,4 +222,8 @@ void Game::RemoveUnusedActors() {
 		delete actorToRemove;
 	}
 	actorsToBeRemoved.clear();
+}
+
+Player* Game::GetPlayer() {
+    return player;
 }

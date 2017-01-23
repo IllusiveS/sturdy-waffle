@@ -74,9 +74,9 @@ void Player::ReadScript(lua_State *L) {
 
 void Player::Fire() {
 
-    if (duration_cast<milliseconds>(
-            system_clock::now().time_since_epoch()).count() - old > 400) {
+    if (duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count() - old > 400) {
         PlayerProjectile *proj = new PlayerProjectile(Vector2(position.x+34, position.y));
+
 
         old = duration_cast<milliseconds>(
                 system_clock::now().time_since_epoch()).count();
@@ -112,8 +112,22 @@ void Player::ExportLua(lua_State *L) {
 
 void Player::collide(IPhysicsable *coll) {
 
-    if (!coll->type.compare("Enemy") || !coll->type.compare("Projectile1")) {
+    if (!coll->type.compare("Enemy") || !coll->type.compare("Asteroid")) {
         Destroy();
+
+    }
+
+    if (!coll->type.compare("Projectile1")) {
+        ((Projectile1 *) coll)->Destroy();
+        hp--;
+
+        if (hp <= 0) {
+            Destroy();
+        } else {
+            tex = Game::GetGame()->GetTextureManager()->GetTexture("player_damaged");
+
+        }
+
     }
 
 }
