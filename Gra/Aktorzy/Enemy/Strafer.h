@@ -25,6 +25,10 @@ public:
     }
     bool inv;
     void Tick(float delta) override;
+
+    float destinationX;
+    float destinationY;
+    long old;
 };
 
 

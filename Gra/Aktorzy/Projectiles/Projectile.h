@@ -24,10 +24,10 @@ public:
 
     void ReadScript(lua_State * L);
     static void ExportLua(lua_State *L);
-protected:
-    Texture * tex;
     float speedX;
     float speedY;
+protected:
+    Texture * tex;
     Projectile(Vector2 position);
 private:
     void Render(SDL_Renderer *renderer) override;
