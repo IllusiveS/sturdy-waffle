@@ -12,6 +12,7 @@
 #include <Gra/Aktorzy/Collisions/CollisionManager.h>
 #include <Gra/Aktorzy/Enemy/Enemy.h>
 #include <Gra/Aktorzy/Enemy/EnemyManager.h>
+#include <Gra/Aktorzy/TestCollider/EnemyKillingBox.h>
 #include "Game.h"
 
 Game * Game::gameSingleton = nullptr;
@@ -40,6 +41,7 @@ void Game::Prepare() {
     enemyManager = new EnemyManager();
 	setupLuaState();
 	Player * player = new Player();
+	EnemyKillingBox * enemyKillingBox = new EnemyKillingBox();
     enemyManager->spawnEnemy();
 	player->ReadScript(L);
 //	TestCollider * coll = new TestCollider();
