@@ -14,7 +14,12 @@ using namespace std::chrono;
 
 Player::Player() : speed(250), IRenderable(), ITickable(), IPhysicsable() {
     tex = Game::GetGame()->GetTextureManager()->GetTexture("player");
-    Position(Vector2(0, Game::GetGame()->SCREEN_HEIGHT / 2));
+    Position(Vector2(32, Game::GetGame()->SCREEN_HEIGHT / 2));
+    width = 32;
+    height = 32;
+    animationCounter = 0;
+    aFrame = 18;
+    aSign = true;
 }
 
 void Player::Move(Vector2 vec) {
@@ -24,10 +29,20 @@ void Player::Move(Vector2 vec) {
 
 
 void Player::Render(SDL_Renderer *renderer) {
-    tex->render((int) position.x, (int) position.y);
+
+    playerRect.x = (aFrame % 6)*width;
+    playerRect.y = (aFrame / 6)*height;
+    tex->render((int) position.x, (int) position.y, width, height, playerRect);
 }
 
 void Player::Tick(float delta) {
+    if(animationCounter>= 15){
+        if(aFrame >= 20){aSign = false;}
+        else if(aFrame <=16){aSign = true;}
+        if (aSign) {aFrame++;}
+        else aFrame--;
+        animationCounter=0;
+    }else animationCounter++;
     if (tickFunc) {
         try {
             (*tickFunc)(this, delta);

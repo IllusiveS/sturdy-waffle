@@ -43,6 +43,7 @@ void TextureManager::ReadTextures() {
 		}
 		++itr;
 	}
+
 }
 
 TextureManager::~TextureManager() {
