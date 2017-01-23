@@ -75,5 +75,7 @@ void Projectile::ExportLua(lua_State *L) {
 }
 
 void Projectile::collide(IPhysicsable *coll) {
-
+    if(coll->type == "EnemyKillingBox") {
+        Destroy();
+    }
 }
