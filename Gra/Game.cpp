@@ -13,6 +13,7 @@
 #include <Gra/Aktorzy/Enemy/Enemy.h>
 #include <Gra/Aktorzy/Enemy/EnemyManager.h>
 #include <Gra/Aktorzy/TestCollider/EnemyKillingBox.h>
+#include <Gra/Aktorzy/Mapa/background.h>
 #include "Game.h"
 
 Game * Game::gameSingleton = nullptr;
@@ -34,13 +35,16 @@ void Game::Prepare() {
 	if(surface == NULL) {
 		printf("[err]ERROR: %s \n", SDL_GetError());
 	}
+
 	mainSurface = surface;
 	textureManager = new TextureManager();
 	inputManager = new InputManager();
 	collisionManager = new CollisionManager();
     enemyManager = new EnemyManager();
 	setupLuaState();
+
 	player = new Player();
+    background * bg = new background();
 	EnemyKillingBox * enemyKillingBox = new EnemyKillingBox();
 	player->ReadScript(L);
 //	TestCollider * coll = new TestCollider();

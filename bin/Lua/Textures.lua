@@ -21,5 +21,7 @@ textures = {
     asteroid = "Textures/Asteroid.png",
     projectile1 = "Textures/Projectile1.png",
     projectile2 = "Textures/Projectile2.png",
-    playerProjectile = "Textures/PlayerProjectile.png"
+    playerProjectile = "Textures/PlayerProjectile.png",
+    bg = "Textures/bg.png"
+
 }
