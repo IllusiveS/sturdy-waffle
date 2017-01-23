@@ -14,7 +14,7 @@ using namespace std::chrono;
 
 Player::Player() : speed(250), IRenderable(), ITickable(), IPhysicsable() {
     tex = Game::GetGame()->GetTextureManager()->GetTexture("player");
-    Position(Vector2(0, Game::GetGame()->SCREEN_HEIGHT / 2));
+    Position(Vector2(32, Game::GetGame()->SCREEN_HEIGHT / 2));
     width = 32;
     height = 32;
     animationCounter = 0;
