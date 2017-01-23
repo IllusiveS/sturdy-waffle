@@ -8,3 +8,7 @@
 IRenderable::IRenderable() {
 	Game::GetGame()->SubscribeRender(this);
 }
+
+IRenderable::~IRenderable() {
+	Game::GetGame()->UnSubscribeRender(this);
+}

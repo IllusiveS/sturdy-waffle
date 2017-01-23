@@ -3,8 +3,14 @@
 //
 
 #include <Gra/Game.h>
+#include <Gra/Aktorzy/Enemy/EnemyManager.h>
 #include "ITickable.h"
 
 ITickable::ITickable() {
 	Game::GetGame()->SubscribeTick(this);
 }
+
+ITickable::~ITickable() {
+	Game::GetGame()->UnSubscribeTick(this);
+}
+
