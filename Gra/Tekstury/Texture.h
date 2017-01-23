@@ -27,6 +27,8 @@ public:
 	//Renders texture at given point
 	void render( int x, int y );
 
+	void render( int x, int y, int width, int height,  SDL_Rect Animrect  );
+
 	//Gets image dimensions
 	int getWidth();
 	int getHeight();
