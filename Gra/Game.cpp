@@ -12,6 +12,7 @@
 #include <Gra/Aktorzy/Collisions/CollisionManager.h>
 #include <Gra/Aktorzy/Enemy/Enemy.h>
 #include <Gra/Aktorzy/Enemy/EnemyManager.h>
+#include <Gra/Aktorzy/TestCollider/EnemyKillingBox.h>
 #include "Game.h"
 
 Game * Game::gameSingleton = nullptr;
@@ -40,6 +41,7 @@ void Game::Prepare() {
     enemyManager = new EnemyManager();
 	setupLuaState();
 	player = new Player();
+	EnemyKillingBox * enemyKillingBox = new EnemyKillingBox();
 	player->ReadScript(L);
 //	TestCollider * coll = new TestCollider();
 }
@@ -78,7 +80,7 @@ bool Game::init()
 		else
 		{
 			//Create renderer for window
-			mainRenderer = SDL_CreateRenderer( mainWindow, -1, SDL_RENDERER_ACCELERATED );
+			mainRenderer = SDL_CreateRenderer( mainWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 			if( mainRenderer == NULL )
 			{
 				printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError() );

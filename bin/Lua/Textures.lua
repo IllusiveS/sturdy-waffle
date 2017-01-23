@@ -11,6 +11,7 @@ textures = {
     wall = "Textures/Wall.png",
     player = "Textures/Player.png",
     player_damaged = "Textures/Player_damaged.png",
+    player = "Textures/ship.png",
     charger = "Textures/Charger.png",
     strafer = "Textures/Strafer.png",
     shooter = "Textures/Shooter.png",

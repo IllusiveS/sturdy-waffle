@@ -29,6 +29,12 @@ private:
 	long old;
 	Texture * tex;
 	float speed;
+	SDL_Rect playerRect;
+	int animationCounter;
+	int aFrame;
+	int width;
+	int height;
+	bool aSign;
 	void Fire();
 	int hp = 2;
 private:

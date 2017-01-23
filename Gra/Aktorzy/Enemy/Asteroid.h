@@ -15,7 +15,6 @@ public:
         speedY = 0;
         tex = Game::GetGame()->GetTextureManager()->GetTexture("asteroid");
         type = "Asteroid";
-        aabb = AABB(Vector2(0, 0), Vector2(32, 32));
 
     }
 

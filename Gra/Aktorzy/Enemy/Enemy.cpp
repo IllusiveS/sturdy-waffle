@@ -47,7 +47,7 @@ void Enemy::ReadScript(lua_State *L) {
 }
 
 void Enemy::Fire() {
-    Projectile1 *proj = new Projectile1(Vector2(position.x - 34, position.y + 15));
+    Projectile1 *proj = new Projectile1(Vector2(position.x, position.y));
 }
 
 void Enemy::Position(Vector2 vec) {
@@ -85,6 +85,10 @@ void Enemy::collide(IPhysicsable *coll) {
         ((PlayerProjectile *) coll)->Destroy();
         Destroy();
     } else if (!coll->type.compare("Asteroid")) {
+        Destroy();
+    }
+    if(coll->type == "EnemyKillingBox") {
+        std::cout << "X|";
         Destroy();
     }
 }

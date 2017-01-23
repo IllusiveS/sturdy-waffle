@@ -6,10 +6,9 @@
 #include "Projectile.h"
 
 Projectile::Projectile(Vector2 position) : IRenderable(), ITickable(), IPhysicsable() {
-
+	aabb = AABB(Vector2(0, 0), Vector2(2, 2));
     StartingPosition(position);
     Position(position);
-    aabb = AABB(Vector2(0, 0), Vector2(4, 4));
 }
 
 void Projectile::Move(Vector2 vec) {
@@ -76,5 +75,7 @@ void Projectile::ExportLua(lua_State *L) {
 }
 
 void Projectile::collide(IPhysicsable *coll) {
-
+    if(coll->type == "EnemyKillingBox") {
+        Destroy();
+    }
 }
