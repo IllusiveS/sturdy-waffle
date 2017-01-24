@@ -15,7 +15,7 @@
 
 void EnemyManager::spawnWaves() {
 
-
+	SetupSpawners();
 }
 
 void EnemyManager::Tick(float delta) {
@@ -161,4 +161,67 @@ void EnemyManager::spawnFinalWave() {
     Boss * boss = new Boss(Vector2(1000,300));
 }
 
+void EnemyManager::ReadScript(lua_State *L) {
+    using namespace luabridge;
+    if (luaL_dofile(L, "Lua/EnemySpawner.lua") == 0) { // script has opened
+        LuaRef table = getGlobal(L, "EnemyManager");
+        if (table.isTable()) {
+            if (table["spawnWave"].isFunction()) {
+                spawnFunc = std::make_shared<LuaRef>(table["spawnEnemy"]);
+            } else {
+                spawnFunc.reset();
+            }
+        }
+    } else {
+        std::cout << "Error, can't open script!" << std::endl;
+    }
+}
 
+
+
+void EnemyManager::ExportLua(lua_State *L) {
+	using namespace luabridge;
+	getGlobalNamespace(L)
+			.beginNamespace("EnemyManager")
+			.beginClass<EnemyManager>("EnemyManager")
+			.addFunction("spawnEnemy", &EnemyManager::SpawnEnemy)
+			.endClass()
+			.endNamespace();
+}
+
+void EnemyManager::SpawnEnemy(Vector2 pos, std::string type) {
+	spawners[type](this, pos);
+}
+
+void EnemyManager::CreateCharger(Vector2 pos) {
+	new Charger(pos);
+}
+
+void EnemyManager::CreateShooter(Vector2 pos) {
+	new Shooter(pos);
+}
+
+void EnemyManager::CreateStraferUp(Vector2 pos) {
+	new Strafer(pos, true);
+}
+
+void EnemyManager::CreateStraferDown(Vector2 pos) {
+	new Strafer(pos, false);
+}
+
+void EnemyManager::CreateAsteroid(Vector2 pos) {
+	new Asteroid(pos);
+}
+
+void EnemyManager::CreateBoss(Vector2 pos) {
+	new Boss(pos);
+}
+
+void EnemyManager::SetupSpawners() {
+	spawners.insert(std::pair<std::string, CreateFunc>("boss", &EnemyManager::CreateBoss));
+	spawners.insert(std::pair<std::string, CreateFunc>("shooter", &EnemyManager::CreateShooter));
+	spawners.insert(std::pair<std::string, CreateFunc>("charger", &EnemyManager::CreateCharger));
+	spawners.insert(std::pair<std::string, CreateFunc>("asteroid", &EnemyManager::CreateAsteroid));
+	spawners.insert(std::pair<std::string, CreateFunc>("straferUp", &EnemyManager::CreateStraferUp));
+	spawners.insert(std::pair<std::string, CreateFunc>("straferDown", &EnemyManager::CreateStraferDown));
+}

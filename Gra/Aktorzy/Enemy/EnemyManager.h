@@ -9,6 +9,12 @@
 #include <set>
 #include "Enemy.h"
 #include <chrono>
+#include <map>
+#include <functional>
+
+class EnemyManager;
+
+typedef std::function<void(EnemyManager*, Vector2)> CreateFunc;
 
 using namespace std::chrono;
 
@@ -39,6 +45,22 @@ public:
     void spawnWave6();
 
     void spawnFinalWave();
+
+	void ReadScript(lua_State * L);
+	static void ExportLua(lua_State *L);
+public:
+	void SpawnEnemy(Vector2 pos, std::string type);
+
+	void CreateCharger(Vector2 pos);
+	void CreateShooter(Vector2 pos);
+	void CreateStraferUp(Vector2 pos);
+	void CreateStraferDown(Vector2 pos);
+	void CreateAsteroid(Vector2 pos);
+	void CreateBoss(Vector2 pos);
+
+	std::map<std::string, CreateFunc> spawners;
+	void SetupSpawners();
+	std::shared_ptr<luabridge::LuaRef> spawnFunc;
 };
 
 
