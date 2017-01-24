@@ -16,6 +16,7 @@ public:
         speedY = 0;
         tex = Game::GetGame()->GetTextureManager()->GetTexture("projectile2");
         type = "Projectile2";
+        layer=2;
     }
     bool moving = false;
     float destinationY;
