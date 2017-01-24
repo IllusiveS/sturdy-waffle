@@ -87,11 +87,8 @@ void Enemy::collide(IPhysicsable *coll) {
     if (!coll->type.compare("PlayerProjectile")) {
         ((PlayerProjectile *) coll)->Destroy();
         Destroy();
-    } else if (!coll->type.compare("Asteroid")) {
-        Destroy();
     }
     if(coll->type == "EnemyKillingBox") {
-        std::cout << "X|";
         Destroy();
     }
 }

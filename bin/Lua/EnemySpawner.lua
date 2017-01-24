@@ -19,7 +19,10 @@ enemies = {
 
         math.randomseed( os.time() )
 
-        if(enemies.waves == 6) then
+        if(enemies.waves == 5) then
+            enemyManager.waitTime = 8000
+            enemies.waves = enemies.waves + 1
+        elseif (enemies.waves == 6) then
             enemies.spawnBoss(enemyManager);
         else
             print(#wavesCreators)
@@ -28,6 +31,7 @@ enemies = {
 
     end,
     spawnBoss = function(enemyManager)
+        enemyManager.waitTime = 6000000
         local position = MATH.Vector2(900, 300)
         enemyManager:spawnEnemy(position, "boss")
         enemies.waves = enemies.waves + 1
@@ -37,14 +41,13 @@ enemies = {
         enemyManager:spawnEnemy(MATH.Vector2(800, 300), "charger")
         enemyManager:spawnEnemy(MATH.Vector2(800, 500), "charger")
 
-        enemyManager:spawnEnemy(MATH.Vector2(1200, 600), "charger")
-        enemyManager:spawnEnemy(MATH.Vector2(1200, 700), "charger")
-        enemyManager:spawnEnemy(MATH.Vector2(1200, 300), "charger")
+        enemyManager:spawnEnemy(MATH.Vector2(1200, 200), "charger")
+        enemyManager:spawnEnemy(MATH.Vector2(1200, 400), "charger")
 
-        enemyManager:spawnEnemy(MATH.Vector2(1600, 400), "charger")
+        enemyManager:spawnEnemy(MATH.Vector2(1600, 100), "charger")
+        enemyManager:spawnEnemy(MATH.Vector2(1600, 300), "charger")
         enemyManager:spawnEnemy(MATH.Vector2(1600, 500), "charger")
-        enemyManager:spawnEnemy(MATH.Vector2(1600, 600), "charger")
-        enemyManager.waitTime = 6000
+        enemyManager.waitTime = 4000
         enemies.waves = enemies.waves + 1
     end,
     strafersWave = function(enemyManager)
@@ -66,7 +69,7 @@ enemies = {
     shooterWave = function(enemyManager)
         enemyManager:spawnEnemy(MATH.Vector2(1200, 300), "shooter")
 
-        enemyManager.waitTime = 7000
+        enemyManager.waitTime = 5000
         enemies.waves = enemies.waves + 1
     end,
     chargerWave2 = function(enemyManager)
