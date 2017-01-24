@@ -9,10 +9,10 @@
 #include "Projectile1.h"
 #include "Projectile.h"
 
-class Projectile1 : Projectile {
+class Projectile1 : public Projectile {
 public:
     Projectile1(Vector2 position) : Projectile(position) {
-        speedX = -150;
+        speedX = -225;
         speedY = 0;
         tex = Game::GetGame()->GetTextureManager()->GetTexture("projectile1");
         type = "Projectile1";

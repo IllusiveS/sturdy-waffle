@@ -12,7 +12,7 @@
 class Charger : Enemy {
 public:
     Charger(Vector2 position) : Enemy(position) {
-        speedX = -75;
+        speedX = -200;
         speedY = 0;
         tex = Game::GetGame()->GetTextureManager()->GetTexture("charger");
         type = "Enemy";

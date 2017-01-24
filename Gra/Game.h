@@ -15,6 +15,7 @@
 #include "Gra/Tekstury/TextureManager.h"
 #include "InputManager.h"
 #include <Gra/Aktorzy/Enemy/EnemyManager.h>
+#include <Gra/Aktorzy/Player/Player.h>
 
 class CollisionManager;
 
@@ -63,6 +64,7 @@ public://Zapisywanie się aktorów
 	void UnSubscribeTick(ITickable * tick);
 	void UnSubscribePhysics(IPhysicsable * phi);
 	void UnSubscribeRender(IRenderable * render);
+	Player * GetPlayer();
 
 
 	int SCREEN_WIDTH = 800;
@@ -88,6 +90,7 @@ private:
 	InputManager * inputManager;
 	CollisionManager * collisionManager;
 	EnemyManager * enemyManager;
+	Player * player;
 	//TODO GameManager
 	void ExportLua(lua_State *L);
 

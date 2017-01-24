@@ -27,7 +27,7 @@ void GameMap::ReadMapFromFile(std::string path) {
 				std::string texture = type["texture"];
 				MapTile * newTile = new MapTile();
 				Texture * foundTexture = Game::GetGame()->GetTextureManager()->GetTexture(texture);
-				newTile->SetupTexture(y * 32, x * 32, foundTexture);
+				newTile->SetupTexture(y * 32+16, x * 32+16, foundTexture);
 				mapElements.insert(newTile);
 			}
 			++rowItr;

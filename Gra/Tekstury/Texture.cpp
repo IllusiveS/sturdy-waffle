@@ -72,7 +72,7 @@ void Texture::free()
 void Texture::render( int x, int y )
 {
 	//Set rendering space and render to screen
-	SDL_Rect renderQuad = { x-(mWidth/2), y-(mHeight), mWidth, mHeight };
+	SDL_Rect renderQuad = { x-(mWidth/2), y-(mHeight/2), mWidth, mHeight };
 	SDL_RenderCopy( Game::GetGame()->GetRenderer(), mTexture, NULL, &renderQuad );
 }
 void Texture::render( int x, int y, int frameW, int frameH, SDL_Rect Animrect  )

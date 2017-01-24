@@ -13,7 +13,7 @@
 #include <Gra/Aktorzy/IPhysicsable.h>
 #include <Gra/Tekstury/Texture.h>
 #include <memory>
-class Player : private Actor, private ITickable, private IRenderable, private IPhysicsable {
+class Player : public Actor, private ITickable, private IRenderable, public IPhysicsable {
 public:
 	Player();
 	virtual ~Player();
@@ -36,6 +36,7 @@ private:
 	int height;
 	bool aSign;
 	void Fire();
+	int hp = 2;
 private:
 	void Render(SDL_Renderer *renderer) override;
 

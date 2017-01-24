@@ -8,12 +8,37 @@
 
 #include <set>
 #include "Enemy.h"
+#include <chrono>
 
-class EnemyManager {
+using namespace std::chrono;
+
+class EnemyManager: ITickable {
 public:
-
-    void spawnEnemy();
+    long startTime = duration_cast<milliseconds>(
+            system_clock::now().time_since_epoch()).count();
+    void spawnWaves();
     std::set<Enemy *> enemies;
+
+    void spawnWave1();
+    void spawnWave2();
+    void spawnWave3();
+    void spawnWave4();
+    void spawnWave5();
+
+    bool wave1 = false;
+    bool wave2 = false;
+    bool wave3 = false;
+    bool wave4 = false;
+    bool wave5 = false;
+    bool wave6 = false;
+    bool wave7 = false;
+    bool finalWave = false;
+
+    void Tick(float delta) override;
+
+    void spawnWave6();
+
+    void spawnFinalWave();
 };
 
 
