@@ -9,6 +9,7 @@ Projectile::Projectile(Vector2 position) : IRenderable(), ITickable(), IPhysicsa
 
     StartingPosition(position);
     Position(position);
+    layer=2;
 }
 
 void Projectile::Move(Vector2 vec) {

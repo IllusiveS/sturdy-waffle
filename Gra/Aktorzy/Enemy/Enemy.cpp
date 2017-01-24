@@ -5,11 +5,14 @@
 #include <Gra/Game.h>
 #include <Gra/Aktorzy/IPhysicsable.h>
 #include <Gra/Aktorzy/Projectiles/Projectile1.h>
+#include <Gra/Aktorzy/Projectiles/PlayerProjectile.h>
 #include "Enemy.h"
 
 Enemy::Enemy(Vector2 position) : IRenderable(), ITickable(), IPhysicsable() {
     StartingPosition(position);
     Position(position);
+	aabb = AABB(Vector2(0, 0), Vector2(16, 16));
+    layer=3;
 }
 
 void Enemy::Move(Vector2 vec) {
@@ -46,7 +49,7 @@ void Enemy::ReadScript(lua_State *L) {
 }
 
 void Enemy::Fire() {
-    Projectile1 *proj = new Projectile1(Vector2(position.x - 34, position.y + 15));
+    Projectile1 *proj = new Projectile1(Vector2(position.x - 34, position.y));
 }
 
 void Enemy::Position(Vector2 vec) {
@@ -80,9 +83,10 @@ void Enemy::ExportLua(lua_State *L) {
 }
 
 void Enemy::collide(IPhysicsable *coll) {
-
     if (!coll->type.compare("PlayerProjectile")) {
-        std::cout << "przeciwnik kaput!";
+        ((PlayerProjectile *) coll)->Destroy();
+        Destroy();
+    } else if (!coll->type.compare("Asteroid")) {
         Destroy();
     }
     if(coll->type == "EnemyKillingBox") {
