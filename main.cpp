@@ -2,6 +2,7 @@
 #include <Gra/Game.h>
 #include <SDL.h>
 #include <thread>
+#include <SDL_mixer.h>
 #include <chrono>
 #include <Gra/Aktorzy/Mapa/GameMap.h>
 
@@ -25,7 +26,10 @@ int main(int argc, char *args[]) {
     Game *gra = Game::GetGame();
     //GameMap *mapa = new GameMap();
    // mapa->ReadMapFromFile("Lua/Map.lua");
-
+    Mix_Init(MIX_INIT_MP3);
+    Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 640);
+    Mix_Music * music = Mix_LoadMUS("/home/zengel/ClionProjects/sturdy-waffle/Gra/music.mp3");
+    Mix_PlayMusic(music, -1);
     for (; !gra->isFinished;) {
         frame++;
         auto sleepTime = microseconds((int) (1000000.0 * (((double) frame) / fps -

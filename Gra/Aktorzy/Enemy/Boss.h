@@ -18,8 +18,7 @@ public:
         tex = Game::GetGame()->GetTextureManager()->GetTexture("boss");
         type = "Enemy";
         aabb = AABB(Vector2(0, 0), Vector2(64, 64));
-        Mix_Init(MIX_INIT_MP3);
-        Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 640);
+
             hit = Mix_LoadWAV("/home/zengel/ClionProjects/sturdy-waffle/Gra/blyatShort.wav");
             tickrate = Mix_LoadWAV("/home/zengel/ClionProjects/sturdy-waffle/Gra/tickrate.wav");
     }
