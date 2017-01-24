@@ -15,7 +15,6 @@
 
 void EnemyManager::spawnWaves() {
 
-	SetupSpawners();
 }
 
 void EnemyManager::Tick(float delta) {
@@ -43,6 +42,7 @@ void EnemyManager::ReadScript(lua_State *L) {
     } else {
         std::cout << "Error, can't open script!" << std::endl;
     }
+	SetupSpawners();
 }
 
 

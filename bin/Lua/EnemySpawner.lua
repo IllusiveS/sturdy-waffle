@@ -7,11 +7,28 @@
 --
 
 enemies = {
+    waves = 0,
     spawnWave = function(enemyManager)
-        enemyManager.waitTime = 3000
-        local position = MATH.Vector2(400, 300)
+        if(enemies.waves == 1) then
+            enemies.spawnBoss(enemyManager);
+        else
+            enemies.spawnEasyWave(enemyManager);
+        end
+
+    end,
+    spawnBoss = function(enemyManager)
+        local position = MATH.Vector2(600, 300)
         enemyManager:spawnEnemy(position, "boss")
-        print("enemy created")
+        enemies.waves = enemies.waves + 1
+    end,
+    spawnEasyWave = function(enemyManager)
+        enemyManager:spawnEnemy(MATH.Vector2(1000, 300), "charger")
+        enemyManager:spawnEnemy(MATH.Vector2(1000, 400), "charger")
+        enemyManager:spawnEnemy(MATH.Vector2(1000, 500), "charger")
+        enemyManager:spawnEnemy(MATH.Vector2(1000, 600), "charger")
+        enemyManager:spawnEnemy(MATH.Vector2(1000, 700), "charger")
+        enemyManager.waitTime = 6000
+        enemies.waves = enemies.waves + 1
     end
 }
 
