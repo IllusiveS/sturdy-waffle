@@ -23,8 +23,7 @@ void EnemyManager::Tick(float delta) {
             system_clock::now().time_since_epoch()).count();
 
     if (now - startTime > 3000 && !wave1) {
-//        spawnWave1();
-        spawnFinalWave();
+        spawnWave1();
         wave1 = true;
     }
 

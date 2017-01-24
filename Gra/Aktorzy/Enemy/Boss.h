@@ -19,8 +19,8 @@ public:
         type = "Enemy";
         aabb = AABB(Vector2(0, 0), Vector2(64, 64));
 
-            hit = Mix_LoadWAV("/home/zengel/ClionProjects/sturdy-waffle/Gra/blyatShort.wav");
-            tickrate = Mix_LoadWAV("/home/zengel/ClionProjects/sturdy-waffle/Gra/tickrate.wav");
+            hit = Mix_LoadWAV("Muza/blyatShort.wav");
+            tickrate = Mix_LoadWAV("Muza/tickrate.wav");
     }
 
     int hp = 15;

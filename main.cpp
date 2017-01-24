@@ -28,7 +28,7 @@ int main(int argc, char *args[]) {
    // mapa->ReadMapFromFile("Lua/Map.lua");
     Mix_Init(MIX_INIT_MP3);
     Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 640);
-    Mix_Music * music = Mix_LoadMUS("/home/zengel/ClionProjects/sturdy-waffle/Gra/music.mp3");
+    Mix_Music * music = Mix_LoadMUS("Muza/music.mp3");
     Mix_PlayMusic(music, -1);
     for (; !gra->isFinished;) {
         frame++;
