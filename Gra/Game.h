@@ -20,6 +20,11 @@
 class CollisionManager;
 
 class Game {
+	struct render_sortby_layer{
+		bool operator()(IRenderable * x, IRenderable * y){
+			return x->layer < y->layer;
+		}
+	};
 public:
 	static void Setup();
 	void Prepare();
@@ -74,7 +79,7 @@ private:
 	void prepareClassesForLua(lua_State *L);
 
 	std::set<ITickable *> ticks;
-	std::set<IRenderable *> renders;
+	std::set<IRenderable *, render_sortby_layer> renders;
 	std::set<Actor *> actors;
 	std::set<Actor *> actorsToBeRemoved;
 
@@ -90,6 +95,8 @@ private:
 	void ExportLua(lua_State *L);
 
 };
+
+
 
 
 #endif //SDLPODSTAWA_GRA_H

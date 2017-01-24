@@ -20,6 +20,7 @@ Player::Player() : speed(250), IRenderable(), ITickable(), IPhysicsable() {
     animationCounter = 0;
     aFrame = 18;
     aSign = true;
+    layer=5;
 }
 
 void Player::Move(Vector2 vec) {

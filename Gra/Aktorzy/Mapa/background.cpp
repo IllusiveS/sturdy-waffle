@@ -9,6 +9,7 @@ background::background() : IRenderable(), ITickable() {
     texture = Game::GetGame()->GetTextureManager()->GetTexture("bg");
     bgRect.x=0;
     bgRect.y=0;
+    layer=0;
 }
 
 void background::Render(SDL_Renderer * renderer) {

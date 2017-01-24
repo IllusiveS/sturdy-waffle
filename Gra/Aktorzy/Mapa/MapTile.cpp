@@ -10,6 +10,7 @@ MapTile::MapTile() : IRenderable() {
 
 void MapTile::Render(SDL_Renderer * renderer) {
 	texture->render(x, y);
+	layer =0;
 }
 
 void MapTile::SetupTexture(int x, int y, Texture * texture) {
