@@ -13,7 +13,7 @@
 #include <Gra/Aktorzy/IRenderable.h>
 #include <Gra/Aktorzy/IPhysicsable.h>
 #include <Gra/Tekstury/Texture.h>
-class Projectile : private Actor, protected ITickable, protected IRenderable, protected IPhysicsable {
+class Projectile : public Actor, protected ITickable, protected IRenderable, protected IPhysicsable {
 public:
     void Move(Vector2 vec);
     void Position(Vector2 vec);

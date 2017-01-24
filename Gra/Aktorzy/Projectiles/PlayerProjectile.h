@@ -9,7 +9,7 @@
 #include <Gra/Game.h>
 #include "Projectile.h"
 
-class PlayerProjectile : Projectile {
+class PlayerProjectile : public Projectile {
 public:
     PlayerProjectile(Vector2 position) : Projectile(position) {
         speedX = 300;

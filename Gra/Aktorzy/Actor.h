@@ -10,7 +10,7 @@ class Actor {
 public:
 	Actor();
 
-	void Destroy();
+	virtual void Destroy();
 
 	virtual ~Actor();
 

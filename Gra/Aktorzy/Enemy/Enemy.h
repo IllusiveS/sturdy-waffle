@@ -13,7 +13,7 @@
 #include <Gra/Aktorzy/IRenderable.h>
 #include <Gra/Aktorzy/IPhysicsable.h>
 #include <Gra/Tekstury/Texture.h>
-class Enemy : private Actor, protected ITickable, protected IRenderable, protected IPhysicsable {
+class Enemy : public Actor, protected ITickable, protected IRenderable, protected IPhysicsable {
 public:
 	virtual ~Enemy();
 
