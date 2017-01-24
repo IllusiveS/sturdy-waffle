@@ -9,10 +9,16 @@
 enemies = {
     waves = 0,
     spawnWave = function(enemyManager)
-        if(enemies.waves == 1) then
+        local wavesCreators = {
+            enemies.chargersWave,
+            enemies.strafersWave
+        }
+
+        if(enemies.waves == 3) then
             enemies.spawnBoss(enemyManager);
         else
-            enemies.spawnEasyWave(enemyManager);
+            print(#wavesCreators)
+            wavesCreators[math.random(#wavesCreators)](enemyManager)
         end
 
     end,
@@ -21,12 +27,34 @@ enemies = {
         enemyManager:spawnEnemy(position, "boss")
         enemies.waves = enemies.waves + 1
     end,
-    spawnEasyWave = function(enemyManager)
-        enemyManager:spawnEnemy(MATH.Vector2(1000, 300), "charger")
-        enemyManager:spawnEnemy(MATH.Vector2(1000, 400), "charger")
-        enemyManager:spawnEnemy(MATH.Vector2(1000, 500), "charger")
-        enemyManager:spawnEnemy(MATH.Vector2(1000, 600), "charger")
-        enemyManager:spawnEnemy(MATH.Vector2(1000, 700), "charger")
+    chargersWave = function(enemyManager)
+        enemyManager:spawnEnemy(MATH.Vector2(800, 100), "charger")
+        enemyManager:spawnEnemy(MATH.Vector2(800, 300), "charger")
+        enemyManager:spawnEnemy(MATH.Vector2(800, 500), "charger")
+
+        enemyManager:spawnEnemy(MATH.Vector2(1200, 600), "charger")
+        enemyManager:spawnEnemy(MATH.Vector2(1200, 700), "charger")
+        enemyManager:spawnEnemy(MATH.Vector2(1200, 300), "charger")
+
+        enemyManager:spawnEnemy(MATH.Vector2(1600, 400), "charger")
+        enemyManager:spawnEnemy(MATH.Vector2(1600, 500), "charger")
+        enemyManager:spawnEnemy(MATH.Vector2(1600, 600), "charger")
+        enemyManager.waitTime = 6000
+        enemies.waves = enemies.waves + 1
+    end,
+    strafersWave = function(enemyManager)
+        enemyManager:spawnEnemy(MATH.Vector2(800, 100), "straferUp")
+        enemyManager:spawnEnemy(MATH.Vector2(1000, 200), "straferDown")
+        enemyManager:spawnEnemy(MATH.Vector2(1200, 300), "straferUp")
+
+        enemyManager:spawnEnemy(MATH.Vector2(1400, 400), "straferUp")
+        enemyManager:spawnEnemy(MATH.Vector2(1600, 500), "straferDown")
+        enemyManager:spawnEnemy(MATH.Vector2(1800, 400), "straferUp")
+
+        enemyManager:spawnEnemy(MATH.Vector2(2000, 300), "straferUp")
+        enemyManager:spawnEnemy(MATH.Vector2(2200, 200), "straferDown")
+        enemyManager:spawnEnemy(MATH.Vector2(2400, 100), "straferUp")
+
         enemyManager.waitTime = 6000
         enemies.waves = enemies.waves + 1
     end
