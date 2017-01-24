@@ -8,6 +8,7 @@
 
 #include <Gra/Game.h>
 #include "Enemy.h"
+#include <SDL_mixer.h>
 
 class Boss : Enemy {
 public:
@@ -17,14 +18,23 @@ public:
         tex = Game::GetGame()->GetTextureManager()->GetTexture("boss");
         type = "Enemy";
         aabb = AABB(Vector2(0, 0), Vector2(64, 64));
-
+        Mix_Init(MIX_INIT_MP3);
+        Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 640);
+            hit = Mix_LoadWAV("/home/zengel/ClionProjects/sturdy-waffle/Gra/blyatShort.wav");
+            tickrate = Mix_LoadWAV("/home/zengel/ClionProjects/sturdy-waffle/Gra/tickrate.wav");
     }
-    int hp = 20;
+
+    int hp = 15;
     bool moving = false;
     float destinationY;
     long old;
     long old2;
+    Mix_Chunk *hit;
+    Mix_Chunk *tickrate;
+    bool tick = false;
+
     void Tick(float delta) override;
+
     void collide(IPhysicsable *coll) override;
 
     void SuperFire();

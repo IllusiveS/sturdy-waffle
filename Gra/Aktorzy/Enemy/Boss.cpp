@@ -23,9 +23,17 @@ void Boss::collide(IPhysicsable *coll) {
 void Boss::Tick(float delta) {
     if (duration_cast<milliseconds>(
             system_clock::now().time_since_epoch()).count() - old2 > 200)
-    tex = Game::GetGame()->GetTextureManager()->GetTexture("boss");
+        tex = Game::GetGame()->GetTextureManager()->GetTexture("boss");
+
+    if (position.x <= 850) {
+        if (!tick) {
+            Mix_PlayChannel(-1, tickrate, 0);
+            tick = true;
+        }
+    }
 
     if (position.x <= 750) {
+
         speedX = 0;
         destinationY = Game::GetGame()->GetPlayer()->position.y;
         if (destinationY < position.y) {
@@ -38,14 +46,14 @@ void Boss::Tick(float delta) {
             if (duration_cast<milliseconds>(
                     system_clock::now().time_since_epoch()).count() - old2 > 1200) {
                 tex = Game::GetGame()->GetTextureManager()->GetTexture("boss2");
-
                 SuperFire();
+                Mix_PlayChannel(-1, hit, 0);
+
                 moving = false;
                 old2 = duration_cast<milliseconds>(
                         system_clock::now().time_since_epoch()).count();
 
-            } else
-            if (duration_cast<milliseconds>(
+            } else if (duration_cast<milliseconds>(
                     system_clock::now().time_since_epoch()).count() - old > 600) {
                 Fire();
                 moving = false;
