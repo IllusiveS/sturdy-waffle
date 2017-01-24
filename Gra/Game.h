@@ -16,6 +16,7 @@
 #include "InputManager.h"
 #include <Gra/Aktorzy/Enemy/EnemyManager.h>
 #include <Gra/Aktorzy/Player/Player.h>
+#include <list>
 
 class CollisionManager;
 
@@ -81,7 +82,7 @@ private:
 	void prepareClassesForLua(lua_State *L);
 
 	std::set<ITickable *> ticks;
-	std::set<IRenderable *, render_sortby_layer> renders;
+	std::map<int, std::list<IRenderable *>> renders;
 	std::set<Actor *> actors;
 	std::set<Actor *> actorsToBeRemoved;
 

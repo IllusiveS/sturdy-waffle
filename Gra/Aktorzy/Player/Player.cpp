@@ -21,6 +21,7 @@ Player::Player() : speed(250), IRenderable(), ITickable(), IPhysicsable() {
     aFrame = 18;
     aSign = true;
     layer=5;
+	AddToLayer();
 }
 
 void Player::Move(Vector2 vec) {

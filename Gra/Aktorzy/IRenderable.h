@@ -13,6 +13,7 @@ public:
 	int layer;
 	IRenderable();
 	virtual ~IRenderable();
+	void AddToLayer();
 	virtual void Render(SDL_Renderer * renderer) = 0;
 };
 

@@ -13,6 +13,7 @@ Enemy::Enemy(Vector2 position) : IRenderable(), ITickable(), IPhysicsable() {
     Position(position);
 	aabb = AABB(Vector2(0, 0), Vector2(16, 16));
     layer=3;
+    AddToLayer();
 }
 
 void Enemy::Move(Vector2 vec) {

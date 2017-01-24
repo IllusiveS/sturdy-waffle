@@ -120,8 +120,11 @@ void Game::UpdatePhysics(float delta) {
 void Game::Render() {
 	SDL_RenderClear(mainRenderer);
 	for(auto itr = renders.begin(); itr != renders.end(); itr++) {
-		IRenderable * renderable = *itr;
-		renderable->Render(mainRenderer);
+		std::list<IRenderable *> renderable = itr->second;
+		for(auto listItr = renderable.begin(); listItr != renderable.end(); listItr++){
+			IRenderable * ren = *listItr;
+			ren->Render(mainRenderer);
+		}
 	}
 	SDL_RenderPresent(mainRenderer);
 }
@@ -164,7 +167,7 @@ void Game::SubscribeTick(ITickable *tick) {
 }
 
 void Game::SubscribeRender(IRenderable *render) {
-	renders.insert(render);
+	renders[render->layer].push_back(render);
 }
 
 void Game::setupLuaState() {
@@ -212,7 +215,7 @@ void Game::UnSubscribePhysics(IPhysicsable *phi) {
 }
 
 void Game::UnSubscribeRender(IRenderable *render) {
-	renders.erase(render);
+	renders[render->layer].remove(render);
 }
 
 void Game::RemoveUnusedActors() {

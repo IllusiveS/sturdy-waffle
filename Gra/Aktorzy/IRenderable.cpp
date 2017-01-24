@@ -6,9 +6,13 @@
 #include "IRenderable.h"
 
 IRenderable::IRenderable() {
-	Game::GetGame()->SubscribeRender(this);
+	layer = 2;
 }
 
 IRenderable::~IRenderable() {
 	Game::GetGame()->UnSubscribeRender(this);
+}
+
+void IRenderable::AddToLayer() {
+	Game::GetGame()->SubscribeRender(this);
 }

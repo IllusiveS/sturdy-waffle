@@ -10,6 +10,7 @@ background::background() : IRenderable(), ITickable() {
     bgRect.x=0;
     bgRect.y=0;
     layer=0;
+    AddToLayer();
 }
 
 void background::Render(SDL_Renderer * renderer) {
