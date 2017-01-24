@@ -36,7 +36,7 @@ private:
 	int height;
 	bool aSign;
 	void Fire();
-	int hp = 2;
+	int hp = 3;
 private:
 	void Render(SDL_Renderer *renderer) override;
 
