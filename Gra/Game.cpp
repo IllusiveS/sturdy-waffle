@@ -47,6 +47,7 @@ void Game::Prepare() {
     background * bg = new background();
 	EnemyKillingBox * enemyKillingBox = new EnemyKillingBox();
 	player->ReadScript(L);
+	enemyManager->ReadScript(L);
 //	TestCollider * coll = new TestCollider();
 }
 
@@ -180,9 +181,11 @@ void Game::setupLuaState() {
 void Game::prepareClassesForLua(lua_State *L) {
 	using namespace luabridge;
 	inputManager->ExportLua(L);
+	EnemyManager::ExportLua(L);
 	Vector2::ExportLua(L);
 	Player::ExportLua(L);
 	ExportLua(L);
+
 }
 
 void Game::ExportLua(lua_State *L) {

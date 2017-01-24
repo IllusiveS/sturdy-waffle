@@ -22,14 +22,11 @@ class EnemyManager: ITickable {
 public:
     long startTime = duration_cast<milliseconds>(
             system_clock::now().time_since_epoch()).count();
+	long waitTime = 1000;
     void spawnWaves();
     std::set<Enemy *> enemies;
 
-    void spawnWave1();
-    void spawnWave2();
-    void spawnWave3();
-    void spawnWave4();
-    void spawnWave5();
+    void spawnWave();
 
     bool wave1 = false;
     bool wave2 = false;
@@ -41,10 +38,6 @@ public:
     bool finalWave = false;
 
     void Tick(float delta) override;
-
-    void spawnWave6();
-
-    void spawnFinalWave();
 
 	void ReadScript(lua_State * L);
 	static void ExportLua(lua_State *L);
@@ -61,6 +54,10 @@ public:
 	std::map<std::string, CreateFunc> spawners;
 	void SetupSpawners();
 	std::shared_ptr<luabridge::LuaRef> spawnFunc;
+
+	void SetWaitTime(long time);
+
+	long GetWaitTime() const;
 };
 
 

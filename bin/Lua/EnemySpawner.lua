@@ -6,3 +6,12 @@
 -- To change this template use File | Settings | File Templates.
 --
 
+enemies = {
+    spawnWave = function(enemyManager)
+        enemyManager.waitTime = 3000
+        local position = MATH.Vector2(400, 300)
+        enemyManager:spawnEnemy(position, "boss")
+        print("enemy created")
+    end
+}
+
