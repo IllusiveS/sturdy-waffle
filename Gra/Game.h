@@ -22,6 +22,8 @@ class CollisionManager;
 class Game {
 	struct render_sortby_layer{
 		bool operator()(IRenderable * x, IRenderable * y){
+			if(x->layer == y->layer)
+				return x < y;
 			return x->layer < y->layer;
 		}
 	};
