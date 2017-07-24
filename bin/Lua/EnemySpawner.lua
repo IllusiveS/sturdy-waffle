@@ -19,10 +19,10 @@ enemies = {
 
         math.randomseed( os.time() )
 
-        if(enemies.waves == 4) then
+        if(enemies.waves == 6) then
             enemyManager.waitTime = 1000
             enemies.waves = enemies.waves + 1
-        elseif (enemies.waves == 5) then
+        elseif (enemies.waves == 7) then
             enemies.spawnBoss(enemyManager);
         else
             wavesCreators[math.random(#wavesCreators)](enemyManager)
