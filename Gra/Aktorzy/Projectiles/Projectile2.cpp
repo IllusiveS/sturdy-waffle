@@ -19,5 +19,5 @@ void Projectile2::Tick(float delta) {
                 system_clock::now().time_since_epoch()).count();
     }
 
-    Move(Vector2(speedX * delta, speedY*delta));
+    Move(Vector2(tarDir.x * delta * speedX, tarDir.y * delta * speedY));
 }

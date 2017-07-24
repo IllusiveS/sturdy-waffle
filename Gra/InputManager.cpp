@@ -7,6 +7,7 @@
 #include <lua.hpp>
 #include <LuaBridge/LuaBridge.h>
 #include "InputManager.h"
+#include "Game.h"
 
 float InputManager::IsButtonPressed(std::string key) {
 	auto it = inputs.find(key);
@@ -24,9 +25,19 @@ void InputManager::UpdateInputs() {
 	setInputValue("right", 0);
 	setInputValue("fire", 0);
 
+	SDL_PollEvent(&e);
+	switch( e.type ){
+		case SDL_QUIT:
+			Game::GetGame()->Finish();
+			break;
+		default:
+			break;
+	}
+
+
 	const Uint8 *state = SDL_GetKeyboardState(NULL);
-	if (state[SDLK_RETURN]) {
-		printf("<RETURN> is pressed.\n");
+	if (state[SDLK_ESCAPE]) {
+		Game::GetGame()->Finish();
 	}
 	if (state[SDL_SCANCODE_RIGHT]) {
 		addInputValue("right", 1);

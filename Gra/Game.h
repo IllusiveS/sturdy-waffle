@@ -57,6 +57,8 @@ public:
 	SDL_Surface * GetSurface() const;
 	//koniec dostępu do pól
 
+	void Finish();
+
 public://Zapisywanie się aktorów
 	void SubscribeActor(Actor * actor);
 	void SubscribeTick(ITickable * tick);

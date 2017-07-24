@@ -29,7 +29,6 @@ void CollisionManager::processPhysics(float delta) {
 	}
 //	printf("End sort\n");
 
-	//TODO zamienić SweepData na IPhysicsable w tym miejscu
 	std::map<IPhysicsable *, std::list<IPhysicsable *>> intersections;
 
 	std::list<std::future<int>> futures = std::list<std::future<int>>();

@@ -37,12 +37,12 @@ void Boss::Tick(float delta) {
         speedX = 0;
         destinationY = Game::GetGame()->GetPlayer()->position.y;
         if (destinationY < position.y) {
-            speedY = -150;
+            speedY = -100;
         } else {
-            speedY = 150;
+            speedY = 100;
         }
 
-        if (abs(destinationY - position.y) < 20) {
+        if (abs(destinationY - position.y) < 200) {
             if (duration_cast<milliseconds>(
                     system_clock::now().time_since_epoch()).count() - old2 > 1200) {
                 tex = Game::GetGame()->GetTextureManager()->GetTexture("boss2");
@@ -70,5 +70,6 @@ void Boss::Tick(float delta) {
 }
 
 void Boss::SuperFire() {
-    Projectile2 *proj = new Projectile2(Vector2(position.x - 34, position.y));
+    Vector2 playerLoc = Game::GetGame()->GetPlayer()->position;
+    Projectile2 *proj = new Projectile2(Vector2(position.x - 34, position.y), playerLoc.x, playerLoc.y);
 }

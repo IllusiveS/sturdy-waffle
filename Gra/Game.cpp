@@ -233,3 +233,7 @@ void Game::RemoveUnusedActors() {
 Player* Game::GetPlayer() {
     return player;
 }
+
+void Game::Finish() {
+	isFinished = true;
+}
